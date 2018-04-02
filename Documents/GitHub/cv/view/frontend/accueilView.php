@@ -10,7 +10,7 @@
         <div class="col-xs-8 col-md-4 profile-picture"> <img src="/cv/public/images/me1.jpg" alt="Stephan" class="img-circle"> </div>
         <div class="heading">
             <h1>Bonjour, c'est moi Stephan</h1>
-            <h3>Développeur Web</h3> <a href="" class="button1">Télécharger CV</a> </div>
+            <h3>Développeur Web</h3> 
     </section>
     <section id="skills">
         <div class="red-divider"></div>
@@ -108,6 +108,7 @@
                         <p>Systeme d'informations</p>
                     </div>
                 </div>
+                
                 <div class="col-sm-6">
                     <div class="education-block">
                         <h5>2018</h5> <span class="glyphicon glyphicon-education"></span>
@@ -120,15 +121,14 @@
                 </div>
             </div>
         </div>
+        <div><a href="index.php?action=cv" class="button3">Voir Et Télécharger CV</a></div>
     </section>
     <section id="portfolio">
+      
         <div class="container">
             <div class="red-divider"></div>
             <div class="heading">
-               <section id="portfolio">
-        <div class="container">
-            <div class="red-divider"></div>
-            <div class="heading">
+                 <div class="white-divider"></div>
                 <h2>Portfolio</h2> </div>
     
                <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
@@ -142,13 +142,13 @@
                
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
-                        <a class="thumbnail" href="" target="_blank"> <img src="/cv/public/images/forteroche.png" > </a></div>
+                        <a class="thumbnail" href="index.php?action=portfolio&amp;id=4" target=""> <img src="/cv/public/images/forteroche.png" > </a></div>
                     
              
                      <?php while ($data = $portfolio->fetch())
                       { ?>
                     <div class="item ">
-                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target="_blank"> <img src= <?php  echo $data['image'] ; ?> alt="site agence web"> </a></div><?php  } ?>
+                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src= <?php  echo $data['image'] ; ?> alt="site agence web"> </a></div><?php  } ?>
                     
                 </div>
                <a class="left carousel-control" href="#myCarousel" data-slide="prev" role="button"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
@@ -156,7 +156,7 @@
             </div>
         </div>
     </section>
-    
+
 
 
 

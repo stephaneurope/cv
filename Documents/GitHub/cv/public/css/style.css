@@ -1,18 +1,18 @@
 /* GENERAL*/
+html{
+    background: #181818;
 
+}
 body
 {
     font-family: "Lato",sans-serif;
+
 }
 h1,h2,h3,h4,h5,h6
 {
     font-weight: bold;
 }
-img
-{
-    max-width: 100%;
-    height: auto;
-}
+
 section
 {
    
@@ -21,7 +21,7 @@ section
 section .heading
 {
     text-align: center;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
 }
 section .heading h2
 {
@@ -127,6 +127,7 @@ section .heading h2
     text-decoration: none;
 }
 
+}
 /* SKILLS */
 #skills
 {
@@ -258,6 +259,7 @@ section .heading h2
 #education
 {
     background: #fff;
+    text-align:center;
 }
 
 #education .heading h2
@@ -302,11 +304,33 @@ education-block .red-divider
     margin-bottom: 20px;
 }
 
-
-/*RECOMMANDATION*/
+.button3
+{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: red;
+    border: 1px solid red;
+    display: inline-block;
+    margin-top:  20px;
+    padding: 18px 50px;
+    border-radius: 3px;
+    transition: all 0.3s ease-in 0s;
+}
+.button3:hover
+{
+    background: red;
+    color: #fff;
+    text-decoration: none;
+}
+/*PORTFOLIO*/
 #portfolio
 {
     background: #d82c2e;
+}
+#portfolio img
+{
+    max-width:600px;
+    max-height: 400px;
 }
 #portfolio .heading h2
 {
@@ -346,12 +370,18 @@ education-block .red-divider
     color: #fff;
     font-style: italic;
 }
+.port img
+{
+    max-width:800px; 
+    max-height:600px;
+}
 
 /* FOOTER */
 footer
 {
     background: #333;
     padding 20px 0 40px;
+
 }
 footer .glyphicon
 {

@@ -1,7 +1,8 @@
 <?php
 namespace Forteroche\Blog\Model;
 require_once("model/Manager.php");
-
+//require 'app/autoloader.php'; 
+//Autoloader::register(); 
 class CommentManager extends Manager
 {
 
@@ -9,7 +10,8 @@ public function getFolio($folioId){
     $db = $this->dbConnect();
     $req = $db->prepare('SELECT id, image, description,techno, titre, liens  FROM  portfolio WHERE id = ?');
    $portfolio=$req->execute(array($folioId));
-    return $req;
+   $portfolio = $req->fetch();
+    return $portfolio;
 } 
 public function getFolio2(){
     $db = $this->dbConnect();

@@ -11,15 +11,22 @@ require_once('app/Text_cut.php');
 class FrontendController{
 
   
-
-  
-
   public function accueil()
   {
      $commentManager = new \Forteroche\Blog\Model\CommentManager();
     $portfolio = $commentManager->getFolio2(); 
     $view = new View('accueilView');
     $view->generer(['portfolio' => $portfolio]);
+    
+}
+public function portfolio()
+  {
+    $commentManager = new \Forteroche\Blog\Model\CommentManager();
+    $portfolio = $commentManager->getFolio($_GET['id']); 
+    $portfol = $commentManager->getFolio2(); 
+  
+    $view = new View('portfolioView');
+    $view->generer(['portfolio'=>$portfolio,'portfol'=>$portfol]);
     
 }
 public function contact()
@@ -34,12 +41,13 @@ public function contact()
     
 }
 
-  public function portfolio()
+  
+
+public function cv()
   {
-    $commentManager = new \Forteroche\Blog\Model\CommentManager();
-    $portfolio = $commentManager->getFolio($_GET['id']); 
-    $view = new View('portfolioView');
-    $view->generer(['portfolio'=>$portfolio]);
+   
+    $view = new View('cvView');
+    $view->generer([]);
     
 }
 

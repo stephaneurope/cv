@@ -1,6 +1,8 @@
 <?php
 namespace  Forteroche\Blog;
 require_once('controller/FrontendController.php'); 
+//require_once 'app/autoloader.php'; 
+//Autoloader::register(); 
 require_once('controller/BackendController.php');
 require_once('controller/AdminController.php');
 require_once('controller/ContactController.php');
@@ -15,7 +17,7 @@ class Routeur {
     $ctrlAdmin = new \Forteroche\Blog\AdminController();
     $ctrlContact = new \Forteroche\Blog\ContactController();
 
-    $tab_action = array("accueil","contact","portfolio","contactForm","connect",'board','commentAction','addPost','addPost','cleanPost','editPost','commentsView','editComment','moderate','reability','addComment','otherPost','newComment','erasePost','eraseComment','connexion','deconnexion','modifPost');
+    $tab_action = array("accueil","contact","portfolio","contactForm","cv","connect",'board','commentAction','addPost','addPost','cleanPost','editPost','commentsView','editComment','moderate','reability','addComment','otherPost','newComment','erasePost','eraseComment','connexion','deconnexion','modifPost');
    
  
 
@@ -40,14 +42,18 @@ class Routeur {
        elseif ($_GET['action'] == 'contact'){
    
         $ctrlfrontend->contact(); 
-         $ctrlContact->contactForm();
+       
       }
       elseif ($_GET['action'] == 'contactForm'){
    
        
          $ctrlContact->contactForm();
       }
-     
+     elseif ($_GET['action'] == 'cv'){
+   
+       
+         $ctrlfrontend->cv();
+      }
 
       /**************Pages à droit restreint****************/
 
