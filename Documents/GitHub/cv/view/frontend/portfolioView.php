@@ -20,14 +20,15 @@
 
         <div class="col-md-8">
 
-          <img class="rounded mx-auto d-block img-thumbnail" src='<?= $portfolio['image'] ?>' alt="">
+          <img class="rounded mx-auto d-block img-thumbnail" src='/cv/public/images/<?= $portfolio['image'] ?>' alt="">
         </div>
   
         <div class="col-md-4">
           <h3 class="my-3">Description du Projet</h3>
           <p><?= $portfolio['description'] ?></p>
           <h3 class="my-3">Technologies Utilisées</h3>
-          <?= $portfolio['techno'] ?>
+          <?= $portfolio['techno'] ?> <br>
+          <?= $portfolio['comment'] ?>
         </div>
 
  
@@ -62,7 +63,7 @@
                      <?php while ($data = $portfol->fetch())
                       { ?>
                     <div class="item ">
-                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src= <?php  echo $data['image'] ; ?> alt="site agence web"> </a></div><?php  } ?>
+                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src="/cv/public/images/<?php echo $data['image'] ; ?>" alt="site agence web"> </a></div><?php  } ?>
                     
                 </div>
                <a class="left carousel-control" href="#myCarousel" data-slide="prev" role="button"> <span class="glyphicon glyphicon-chevron-left"></span> </a>

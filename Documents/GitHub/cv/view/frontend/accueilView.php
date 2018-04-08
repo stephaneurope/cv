@@ -148,7 +148,7 @@
                      <?php while ($data = $portfolio->fetch())
                       { ?>
                     <div class="item ">
-                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src= <?php  echo $data['image'] ; ?> alt="site agence web"> </a></div><?php  } ?>
+                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src="/cv/public/images/<?php  echo $data['image'] ; ?>" alt="site agence web"> </a></div><?php  } ?>
                     
                 </div>
                <a class="left carousel-control" href="#myCarousel" data-slide="prev" role="button"> <span class="glyphicon glyphicon-chevron-left"></span> </a>

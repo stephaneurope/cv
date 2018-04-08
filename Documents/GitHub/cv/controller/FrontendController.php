@@ -2,7 +2,7 @@
 namespace Forteroche\Blog;
     // Chargement des classes
 require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
+require_once('model/FolioManager.php');
 require_once('view/frontend/view.php');
 require_once('app/MessageFlash.php');
 require_once('app/Text_cut.php');
@@ -13,17 +13,17 @@ class FrontendController{
   
   public function accueil()
   {
-     $commentManager = new \Forteroche\Blog\Model\CommentManager();
-    $portfolio = $commentManager->getFolio2(); 
+     $folioManager = new \Forteroche\Blog\Model\FolioManager();
+    $portfolio = $folioManager->getFolio2(); 
     $view = new View('accueilView');
     $view->generer(['portfolio' => $portfolio]);
     
 }
 public function portfolio()
   {
-    $commentManager = new \Forteroche\Blog\Model\CommentManager();
-    $portfolio = $commentManager->getFolio($_GET['id']); 
-    $portfol = $commentManager->getFolio2(); 
+    $folioManager = new \Forteroche\Blog\Model\FolioManager();
+    $portfolio = $folioManager->getFolio($_GET['id']); 
+    $portfol = $folioManager->getFolio2(); 
   
     $view = new View('portfolioView');
     $view->generer(['portfolio'=>$portfolio,'portfol'=>$portfol]);
@@ -80,9 +80,9 @@ public function board()
 public function error()
 {
     $postManager = new \Forteroche\Blog\Model\PostManager();
-    $commentManager = new \Forteroche\Blog\Model\CommentManager();
+    $folioManager = new \Forteroche\Blog\Model\FolioManager();
     $post = $postManager;
-    $comments = $commentManager;
+    $portfolio = $folioManager;
     $chapters = $postManager->getPosts(); 
     $view = new View('errorView');
     $view->generer(['post' => $post,'comments' => $comments,'chapters'=>$chapters]);

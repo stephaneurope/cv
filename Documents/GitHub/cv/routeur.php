@@ -17,7 +17,7 @@ class Routeur {
     $ctrlAdmin = new \Forteroche\Blog\AdminController();
     $ctrlContact = new \Forteroche\Blog\ContactController();
 
-    $tab_action = array("accueil","contact","portfolio","contactForm","cv","connect",'board','commentAction','addPost','addPost','cleanPost','editPost','commentsView','editComment','moderate','reability','addComment','otherPost','newComment','erasePost','eraseComment','connexion','deconnexion','modifPost');
+    $tab_action = array("accueil","contact","portfolio","contactForm","cv","portfolioInsert","portfolioInsertAction","connect",'boardFolio','projectView','commentAction','addPost','addPost','cleanProject','editPost','commentsView','editComment','moderate','reability','addComment','otherPost','newComment','eraseProject','eraseComment','connexion','deconnexion','portfolioModifAction','portfolioModif');
    
  
 
@@ -25,35 +25,63 @@ class Routeur {
 
     try{
       if (isset($_GET['action']) && in_array($_GET['action'], $tab_action)){
-
+     /*********Affichage de la page d'accueil**********/ 
         if ($_GET['action'] == 'accueil') {
           $ctrlfrontend->accueil();
           
         }
+        /*********page portfolio**********/ 
         elseif ($_GET['action'] == 'portfolio') {    
             $ctrlfrontend->portfolio();       
       }
-       
+      /*********page vue des projets**********/ 
+        elseif ($_GET['action'] == 'projectView') {    
+            $ctrlBackend->projectView();       
+      }
+       /*********connexion**********/ 
        elseif ($_GET['action'] == 'connect'){
    
         $ctrlBackend->connect(); 
             
       }
+      /*********Affiche la vue du contact**********/ 
        elseif ($_GET['action'] == 'contact'){
    
         $ctrlfrontend->contact(); 
        
       }
+      /*********envoie le message**********/ 
       elseif ($_GET['action'] == 'contactForm'){
    
-       
          $ctrlContact->contactForm();
       }
+      /*********Affichage de la page CV**********/ 
      elseif ($_GET['action'] == 'cv'){
    
        
          $ctrlfrontend->cv();
       }
+      /*********affiche la page d'insertion de nouveau projet**********/  
+elseif ($_GET['action'] == 'portfolioInsert'){
+   
+         $ctrlBackend->portfolioInsert();
+         
+      }
+      /*********insertion d'un nouveau projet**********/ 
+elseif ($_GET['action'] == 'portfolioInsertAction'){
+    
+       
+         $ctrlBackend->portfolioInsertAction(($_FILES['image']['name']),$_POST['description'],$_POST['techno'],$_POST['comment'],$_POST['titre'], $_POST['liens']);
+
+      }
+      /*********affichage du boarFolio**********/ 
+elseif ($_GET['action'] == 'boardFolio'){
+   
+         $ctrlBackend->boardFolio();
+         
+      }
+
+
 
       /**************Pages à droit restreint****************/
 
@@ -89,14 +117,15 @@ class Routeur {
        throw new Exception('L\' accès à été refusé <br> Vous n êtes pas autorisé à consulter cette page <br> HTTP ERROR 403');
       }
     }
-    elseif ($_GET['action'] == 'cleanPost'){
+    /********Page de validation de supression d'un projet***************/
+    elseif ($_GET['action'] == 'cleanProject'){
      if (isset($_GET['id']) && $_GET['id'] > 0) {
-      session_start();
-     if($_SESSION['id'] && $_SESSION['pseudo']){
-        $ctrlBackend->cleanPost($_GET['id']);
-      } else{
-        throw new Exception('L\' accès à été refusé <br> Vous n êtes pas autorisé à consulter cette page <br> HTTP ERROR 403');
-      }
+      //session_start();
+     //if($_SESSION['id'] && $_SESSION['pseudo']){
+        $ctrlBackend->cleanProject($_GET['id']);
+      //} else{
+       // throw new Exception('L\' accès à été refusé <br> Vous n êtes pas autorisé à consulter cette page <br> HTTP ERROR 403');
+      //}
 
     }else{
       throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');
@@ -197,10 +226,10 @@ elseif ($_GET['action'] == 'newComment') {
     }
 
 }
-/***********effacer un post***************/ 
-elseif ($_GET['action'] == 'erasePost'){
+/***********effacer un projet***************/ 
+elseif ($_GET['action'] == 'eraseProject'){
  if (isset($_GET['id']) && $_GET['id'] > 0) {
-  $ctrlBackend->erasePost($_GET['id']);
+  $ctrlBackend->eraseProject($_GET['id']);
 } else{
       throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');
     }
@@ -231,11 +260,17 @@ elseif ($_GET['action'] == 'deconnexion'){
 }
 
 
-/************** modification d'un post *****************/       
-elseif ($_GET['action'] == 'modifPost') {
+/************** modification d'un post *****************/   
+ 
+elseif ($_GET['action'] == 'portfolioModif'){
+   
+         $ctrlBackend->portfolioModif();
+         
+      }    
+elseif ($_GET['action'] == 'portfolioModifAction') {
   if (isset($_GET['id']) && $_GET['id'] > 0) {
    
-     $ctrlBackend->modifPost($_GET['id'],$_POST['content'],$_POST['title'],$_POST['chapter']);
+     $ctrlBackend->portfolioModifAction(($_FILES['image']['name']),$_POST['description'],$_POST['techno'],$_POST['comment'],$_POST['titre'], $_POST['liens']);
 }else{
       throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');
     }

@@ -3,25 +3,57 @@ namespace Forteroche\Blog\Model;
 require_once("model/Manager.php");
 //require 'app/autoloader.php'; 
 //Autoloader::register(); 
-class CommentManager extends Manager
+class FolioManager extends Manager
 {
 
 public function getFolio($folioId){
     $db = $this->dbConnect();
-    $req = $db->prepare('SELECT id, image, description,techno, titre, liens  FROM  portfolio WHERE id = ?');
+    $req = $db->prepare('SELECT id, image, description,techno,comment, titre, liens  FROM  portfolio WHERE id = ?');
    $portfolio=$req->execute(array($folioId));
    $portfolio = $req->fetch();
     return $portfolio;
 } 
 public function getFolio2(){
     $db = $this->dbConnect();
-    $req = $db->prepare('SELECT id, image, description,techno, titre, liens  FROM  portfolio');
+    $req = $db->prepare('SELECT id, image, description,techno,comment, titre, liens  FROM  portfolio');
    $portfolio=$req->execute(array());
     return $req;
+}
+public function insertfolio($image, $description, $techno, $comment, $titre,$liens){
+    $db = $this->dbConnect();
+    $req = $db->prepare('INSERT INTO portfolio(image, description, techno, comment, titre,liens) VALUES(?, ?, ?, ?, ?,?)');
+    $portfolio=$req->execute(array($image, $description, $techno, $comment, $titre, $liens));
+    return $portfolio;
+}
+
+public function deleteProject($folioId){
+  $db = $this->dbConnect();
+  $req = $db->prepare('DELETE FROM portfolio  WHERE id = ?'); 
+  $deleteLines= $req->execute(array($folioId));
+  return $deleteLines;
+}
+
+public function updateProject($image, $description, $techno, $comment, $titre,$liens)
+{
+    $db = $this->dbConnect();
+    $req = $db->prepare('UPDATE portfolio SET image = ?, description = ?, techno = ?, , comment = ?,titre  = ?,lien  = ?    WHERE id = ? ');
+    $reaffected =$req->execute(array($image, $description, $techno, $comment, $titre, $liens));
+    return $reaffected;
+
 }
 
 
 
+
+
+public function postComment($postId, $author,$comment)
+{
+    $db = $this->dbConnect();
+    $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, creationDate) VALUES(?, ?, ?, NOW())');
+    $affectedLines = $comments->execute(array($postId,$author, $comment));
+
+    return $affectedLines;
+}
 
 
 
@@ -44,14 +76,7 @@ public function getComment($commentId)
 }
 
 
-public function postComment($postId, $author,$comment)
-{
-    $db = $this->dbConnect();
-    $comments = $db->prepare('INSERT INTO comments(post_id, author, comment, creationDate) VALUES(?, ?, ?, NOW())');
-    $affectedLines = $comments->execute(array($postId,$author, $comment));
 
-    return $affectedLines;
-}
 
 public function updateComment($commentId,$comment)
 {
