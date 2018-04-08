@@ -23,6 +23,7 @@ class BackendController{
   public $imagePath      = '';
   public $imageExtension = '';
   public $isUploadSuccess = false;
+  public $isImageUpdated = false;
 
 
    public function portfolioInsert()
@@ -176,14 +177,16 @@ public function cleanProject($folioId){
        exit;
    }
 
-public function portfolioModif()
+public function portfolioModif($folioId)
 {
-
+    $folioManager = new \Forteroche\Blog\Model\FolioManager();
+    $portfolio = $folioManager->getFolio($_GET['id']); 
     $view = new View('portfolioModif');
-    $view->generer(['titreError'=>$this->titreError, 'descriptionError'=>$this->descriptionError, 'technoError'=>$this->technoError, 'commentError'=>$this->commentError,'imageError'=>$this->imageError,'liensError'=>$this->liensError,'titre'=>$this->titre,'description'=>$this->description,'techno'=>$this->techno,'comment'=>$this->comment,'image'=>$this->image,'liens'=>$this->liens,'isSuccess'=>$this->isSuccess]);
+    $view->generer(['titreError'=>$this->titreError, 'descriptionError'=>$this->descriptionError, 'technoError'=>$this->technoError, 'commentError'=>$this->commentError,'imageError'=>$this->imageError,'liensError'=>$this->liensError,'titre'=>$this->titre,'description'=>$this->description,'techno'=>$this->techno,'comment'=>$this->comment,'image'=>$this->image,'liens'=>$this->liens,'isSuccess'=>$this->isSuccess,'portfolio'=>$portfolio]);
+      var_dump($_GET['id'] );
   }
 
-     public function portfolioModifAction($image, $description, $techno, $comment, $titre,$liens)
+     public function portfolioModifAction($folioId, $image, $description, $techno, $comment, $titre,$liens)
     {
 
     
@@ -192,9 +195,7 @@ public function portfolioModif()
 {
     $this->titre           = ($_POST['titre']);
     $this->description     = ($_POST['description']);
-  
     $this->techno          = ($_POST['techno']);
-
     $this->comment         = ($_POST['comment']);
     $this->liens           = ($_POST['liens']);
     $this->image           = ($_FILES['image']['name']);
@@ -202,6 +203,7 @@ public function portfolioModif()
     $this->imageExtension  = pathinfo($this->imagePath, PATHINFO_EXTENSION);
     $this->isSuccess       = true;
     $this->isUploadSuccess = true;
+    $this->isImageUpdated = true;
 
 
 if(empty($this->titre)){
@@ -231,14 +233,13 @@ if(empty($this->titre)){
        
       }   
       if(empty($this->image)){
-        $this->imageError = 'Ce champ ne peut pas etre vide';
-       $this->isSuccess     = false;
+        $this->isImageUpdated = false;
     
       }
       else
     {
-        $this->isUploadSucces = true;
-
+       $this->isImageUpdated = true;
+       $this->isUploadSucces = true;
         if($this->imageExtension != "jpg" && $this->imageExtension != "png" && $this->imageExtension != "jpeg" && $this->imageExtension != "gif")
         {
             $this->imageError = "Les fichiers autorisés sont: .jpg, .jpeg, .png, .gif";
@@ -264,14 +265,13 @@ if(empty($this->titre)){
 
       }  
     }    
-       if($this->isSuccess && $this->isUploadSuccess) {
+       if(($this->isSuccess && $this->isImageUpdated && $this->isUploadSuccess)||($this->isSuccess && !$this->isImageUpdated)) {
+       
     $folioManager = new \Forteroche\Blog\Model\FolioManager();
-    $portfolio = $folioManager->updateProject($image, $description, $techno, $comment, $titre, $liens);
-    header('location:index.php?action=portfolioModif');
-    exit();
-} else {
-    $view = new View('modifProject');
-    $view->generer(
+      $portfolio = $folioManager->getFolio($_GET['id']); 
+    $reaffected = $folioManager->updateProject($folioId, $image, $description, $techno, $comment, $titre, $liens);
+    $view = new View('portfolioModif');
+        $view->generer(
         [
             'titreError'=>$this->titreError,
             'descriptionError'=>$this->descriptionError,
@@ -285,14 +285,49 @@ if(empty($this->titre)){
             'comment'=>$this->comment,
             'image'=>$this->image,
             'liens'=>$this->liens,
-            'isSuccess'=>$this->isSuccess
+            'isSuccess'=>$this->isSuccess,
+            'portfolio'=>$portfolio
+     
+            
+
+
+        ]
+    );  
+
+}else{
+  $folioManager = new \Forteroche\Blog\Model\FolioManager(); 
+$portfolio = $folioManager->getFolio($_GET['id']); 
+    $reaffectedIm = $folioManager->updateProjectNoImage($folioId,$description, $techno, $comment, $titre, $liens);
+      $view = new View('portfolioModif');
+        $view->generer(
+        [
+            'titreError'=>$this->titreError,
+            'descriptionError'=>$this->descriptionError,
+            'technoError'=>$this->technoError,
+            'commentError'=>$this->commentError,
+            'imageError'=>$this->imageError,
+            'liensError'=>$this->liensError,
+            'titre'=>$this->titre,
+            'description'=>$this->description,
+            'techno'=>$this->techno,
+            'comment'=>$this->comment,
+            'image'=>$this->image,
+            'liens'=>$this->liens,
+            'isSuccess'=>$this->isSuccess,
+            'portfolio'=>$portfolio
+
+
         ]
     );
-}
+} 
+
+
+
     
  }  
 
 }
+
 
 
 

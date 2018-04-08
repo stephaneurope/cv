@@ -264,18 +264,18 @@ elseif ($_GET['action'] == 'deconnexion'){
  
 elseif ($_GET['action'] == 'portfolioModif'){
    
-         $ctrlBackend->portfolioModif();
+         $ctrlBackend->portfolioModif($_GET['id']);
          
       }    
 elseif ($_GET['action'] == 'portfolioModifAction') {
-  if (isset($_GET['id']) && $_GET['id'] > 0) {
+  //if (isset($_GET['id']) && $_GET['id'] > 0) {
    
-     $ctrlBackend->portfolioModifAction(($_FILES['image']['name']),$_POST['description'],$_POST['techno'],$_POST['comment'],$_POST['titre'], $_POST['liens']);
-}else{
-      throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');
-    }
+     $ctrlBackend->portfolioModifAction($_GET['id'],($_FILES['image']['name']),$_POST['description'],$_POST['techno'],$_POST['comment'],$_POST['titre'], $_POST['liens']);
+}//else{
+     // throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');
+    //}
 
-}
+//}
 
 
 }else{throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');}

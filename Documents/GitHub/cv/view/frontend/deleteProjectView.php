@@ -10,7 +10,7 @@
                 <p class="alert-warning">Etes vous sur de vouloir supprimer?</p>
                 <div class="form-actions">
                     <div class="warning">
-                        <input type="submit" class="btn btn-warning" href="index.php?action=board" value='Oui' /> <a class="btn btn-danger" href="index.php?action=board">Non</a> </div>
+                        <input type="submit" class="btn btn-warning" href="index.php?action=board" value='Oui' /> <a class="btn btn-danger" href="index.php?action=boardFolio">Non</a> </div>
                 </div>
             </form>
         </div>

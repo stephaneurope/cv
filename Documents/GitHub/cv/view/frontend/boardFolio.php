@@ -22,7 +22,7 @@
                                         <?= htmlspecialchars($data['titre']) ?>
                                     </td>
                                     
-                                    <td width=50%> <a class="btn btn-info btn-reduc" href="index.php?action=projectView&id=<?= $data['id']?>"><span class="glyphicon glyphicon-eye-open"></span> Voir</a> <a class="btn btn-primary btn-reduc" href="index.php?action=editPost&id=<?= $data['id']?>"><span class="glyphicon glyphicon-pencil"></span> Modifier</a> <a class="btn btn-danger btn-reduc" href="index.php?action=cleanProject&id=<?= $data['id']?>"><span class="glyphicon glyphicon-remove"></span> Suprimer</a> </td>
+                                    <td width=50%> <a class="btn btn-info btn-reduc" href="index.php?action=projectView&id=<?= $data['id']?>"><span class="glyphicon glyphicon-eye-open"></span> Voir</a> <a class="btn btn-primary btn-reduc" href="index.php?action=portfolioModif&id=<?= $data['id']?>"><span class="glyphicon glyphicon-pencil"></span> Modifier</a> <a class="btn btn-danger btn-reduc" href="index.php?action=cleanProject&id=<?= $data['id']?>"><span class="glyphicon glyphicon-remove"></span> Suprimer</a> </td>
                                 </tr>
                                 <?php } ?>
                         </tbody>

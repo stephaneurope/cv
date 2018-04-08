@@ -33,12 +33,20 @@ public function deleteProject($folioId){
   return $deleteLines;
 }
 
-public function updateProject($image, $description, $techno, $comment, $titre,$liens)
+public function updateProject($folioId, $image, $description, $techno, $comment, $titre, $liens)
 {
     $db = $this->dbConnect();
-    $req = $db->prepare('UPDATE portfolio SET image = ?, description = ?, techno = ?, , comment = ?,titre  = ?,lien  = ?    WHERE id = ? ');
-    $reaffected =$req->execute(array($image, $description, $techno, $comment, $titre, $liens));
+    $req = $db->prepare('UPDATE portfolio SET image = ?, description = ?, techno = ?, comment = ?,titre  = ?,liens  = ? WHERE id = ? ');
+    $reaffected =$req->execute(array($image, $description, $techno, $comment, $titre, $liens, $folioId));
     return $reaffected;
+
+}
+public function updateProjectNoImage($folioId,$description, $techno, $comment, $titre, $liens)
+{
+    $db = $this->dbConnect();
+    $req = $db->prepare('UPDATE portfolio SET description = ?, techno = ?, comment = ?,titre  = ?,liens  = ? WHERE id = ? ');
+    $reaffectedIm =$req->execute(array($description, $techno, $comment, $titre, $liens,$folioId));
+    return $reaffectedIm;
 
 }
 

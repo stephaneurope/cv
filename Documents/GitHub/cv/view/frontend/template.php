@@ -4,18 +4,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="Serri Stephan" />
-    <meta name="description" content="Découvrez chaque mois un chapitre de mon livre." />
-    <meta name="copyright" content="©forteroche" />
-    <meta property="og:title" content="Billet simple pour l'alaska" />
+    <meta name="description" content="cv personnel de serri stephan webmaster" />
+    <meta name="copyright" content="©serri-stephan" />
+    <meta property="og:title" content="serri-stephan.com" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
-    <meta property="og:description" content="Découvrez chaque mois un chapitre de mon livre." />
+    <meta property="og:description" content="cv personnel de serri stephan webmaster" />
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@publisher_handle">
-    <meta name="twitter:title" content="Découvrez chaque mois un chapitre de mon livre.">
-    <meta name="twitter:description" content="Découvrez chaque mois un chapitre de mon livre.">
+    <meta name="twitter:title" content="cv personnel de serri stephan webmaster">
+    <meta name="twitter:description" content="cv personnel de serri stephan webmaster">
     <meta name="twitter:creator" content="Serri Stephan">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,8 +62,10 @@
 
    
     <footer class="text-center container-fluid">
-        <a href="#about"> <span class="glyphicon glyphicon-chevron-up"></span> </a>
-        <h5>© 2018 SERRI-STEPHAN.COM</h5> </footer>
+
+        <a href="#about"> <span class="glyphicon glyphicon-chevron-up"></span>  </a><br>
+        <a style='color:#fff;'>connexion</a>
+        <h5>© 2018 SERRI-STEPHAN.COM</h5></footer>
 </body>
 
 </html>
