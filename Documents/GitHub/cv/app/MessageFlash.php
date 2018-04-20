@@ -1,5 +1,5 @@
 <?php
-    namespace Forteroche\Blog;
+    namespace Serri\Cv;
     class MessageFlash{
     public function __construct(){
     $status = session_status();
