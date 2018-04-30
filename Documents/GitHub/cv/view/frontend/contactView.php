@@ -42,13 +42,14 @@ Je serai votre interlocuteur unique et privilégié.</p>
 Au plaisir d’entamer une belle collaboration avec vous !</p></div>
 </div>
     </section>
+    <section class="prog" style='background:#fff;'>
 <div class="container contact">
             <div class="divider"></div>
             <div class="heading">
                 <h2>Contactez-moi</h2>
             </div>
                 
-           <div class="row">
+           <div class="row ">
                <div class="col-lg-10 col-lg-offset-1">
                     <form id="contact-form" method="post" action='index.php?action=contactForm' role="form">
                         <div class="row">
@@ -96,4 +97,4 @@ Au plaisir d’entamer une belle collaboration avec vous !</p></div>
                 </div>
            </div>
         </div>
-
+</section>

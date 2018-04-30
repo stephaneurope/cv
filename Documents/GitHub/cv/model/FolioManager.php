@@ -1,6 +1,7 @@
 <?php
-namespace Serri\Cv;
-require_once("model/Manager.php");
+namespace Model;
+
+require "vendor/autoload.php";
 
 class FolioManager extends Manager
 {

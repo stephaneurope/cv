@@ -1,5 +1,5 @@
 <?php
-namespace Serri\Cv;
+namespace Model;
 
 class Manager
 {

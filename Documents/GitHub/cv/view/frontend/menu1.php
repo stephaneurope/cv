@@ -5,8 +5,11 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="index.php?action=cv">CV</a></li>
+        
+                    <li><a href="#skills">Compétences</a></li>
+                    <li><a href="#experience">Expérience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="index.php?action=instagram">Instagram</a></li>
                     <li><a href="index.php?action=contact">contact/devis</a></li>
                 </ul>

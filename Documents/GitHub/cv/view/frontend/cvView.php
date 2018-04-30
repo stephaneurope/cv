@@ -5,10 +5,12 @@
     
  <div id="top">
     <div id="cv" class="instaFade">
+
         <div class="mainDetails">
-            <div id="headshot" class="quickFade"> <img src="public/images/me2.jpg" alt="Alan Smith" /> </div>
+          <?php while ($data0 = $result->fetch()){  ?>  
+            <div id="headshot" class="img_profil quickFade"> <img src="public/images/<?=$data0['profil_img']?>"  alt="Serri Stephan" /> </div>
             <div id="name">
-                <?php while ($data0 = $result->fetch()){  ?>
+                
                 <h1 class="quickFade delayTwo"><?=$data0['nom'].' '.$data0['prenom'] ?></h1>
                 <h2 class="quickFade delayThree"><?=$data0['works']?></h2> </div>
             <div id="contactDetails" class="quickFade delayFour">
@@ -81,8 +83,4 @@
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
     </script>
-    <script type="text/javascript">
-        var pageTracker = _gat._getTracker("UA-3753241-1");
-        pageTracker._initData();
-        pageTracker._trackPageview();
-    </script>
+   

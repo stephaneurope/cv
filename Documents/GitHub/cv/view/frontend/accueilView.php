@@ -1,16 +1,14 @@
 <?php 
     session_start();
     $this->title = 'serri stephan' ;
- include "menu.php" ;
+ include "menu1.php" ;
     ?>
 
-               
-  
     <section id="about" class="container-fluid">
-       
-        <div class="col-xs-8 col-md-4 profile-picture"> <img src="/cv/public/images/me3.jpg" alt="Stephan" class="img-circle img-responsive"> </div>
+       <?php while ($data0 = $result->fetch()){  ?>
+        <div class="col-xs-8 col-md-4 profile-picture "> <img src="public/images/<?=$data0['profil_img']?>"  alt="Serri Stephan" class="img-circle img-responsive"> </div>
         <div class="heading">
-             <?php while ($data0 = $result->fetch()){  ?>
+             
             <h1>Bonjour, c'est moi <?=$data0['prenom']; ?></h1>
             <h3><?=$data0['works']; ?></h3> 
        <?php }  ?>     
@@ -19,7 +17,7 @@
         <div class="red-divider"></div>
         <div class="heading">
             <h2>Compétences</h2> </div>
-        <div class="container">
+        <div class="container prog">
             <div class="row">
                 <div class="col-md-6">
                     <div class="progress">
@@ -69,7 +67,7 @@
                             </div>
                             <div class="timeline-body">
                                 <p>Dévellopement de plusieurs projets web.</p>
-                                <p>Langages utilisées: CSS/HTML/Javascript/Php</p>
+                                <p>Langages utilisées: CSS/HTML/JS/Php</p>
                                 <p>Framework utilisés: Bootstrap/JQuery</p>
                                 <p>Bonnes pratique utilisées: POO/MVC</p>
                             </div>
@@ -86,7 +84,7 @@
                                 <p class="text-muted"><small class="glyphicon glyphicon-time"></small> 1999-Aujourd'hui</p>
                             </div>
                             <div class="timeline-body">
-                                <p>Maîtrise du procédé industriel de fabrication de produits alimentaires. Qualités nécessaires : respect des délais, des cadences, de la qualité et du coût des produits. </p>
+                                <p>Maîtrise du procédé industriel de fabrication de produits alimentaires. </p>
                                 <p>Animation d'une équipe d'opérateurs de fabrication </p>
                             </div>
                         </div>
@@ -129,6 +127,7 @@
     <section id="portfolio">
       
         <div class="container">
+          
             <div class="red-divider"></div>
             <div class="heading">
                  <div class="white-divider"></div>
@@ -145,19 +144,20 @@
                
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
-                        <a class="thumbnail" href="index.php?action=portfolio&amp;id=4" target=""> <img src="/cv/public/images/forteroche.png" > </a></div>
+                        <a class="thumbnail" href="index.php?action=portfolio&amp;id=4" target=""> <img src="/cv/public/images/forteroche.png" class="img-responsive" > </a></div>
                     
              
                      <?php while ($data = $portfolio->fetch())
                       { ?>
                     <div class="item ">
-                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src="/cv/public/images/<?php  echo $data['image'] ; ?>" alt="site agence web"> </a></div><?php  } ?>
+                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src="/cv/public/images/<?php  echo $data['image'] ; ?>" alt="site agence web" class="img-responsive"> </a></div><?php  } ?>
                     
                 </div>
                <a class="left carousel-control" href="#myCarousel" data-slide="prev" role="button"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
                 <a class="right carousel-control" href="#myCarousel" data-slide="next" role="button"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
             </div>
         </div>
+
     </section>
 
 

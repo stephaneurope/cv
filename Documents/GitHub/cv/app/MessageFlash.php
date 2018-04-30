@@ -1,5 +1,5 @@
 <?php
-    namespace Serri\Cv;
+    namespace App;
     class MessageFlash{
     public function __construct(){
     $status = session_status();

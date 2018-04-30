@@ -1,9 +1,11 @@
 <?php
-namespace Serri\Cv;
-require_once("model/Manager.php");
+namespace Model;
+
+require "vendor/autoload.php";
 
 class AdminManager extends Manager
 {
+
   public function identity()
     {
         $db = $this->dbConnect();
@@ -21,8 +23,15 @@ class AdminManager extends Manager
 
         return  $reaffected;
     }
+     public function updateProfilImg($profil_img)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare ('UPDATE users SET profil_img = ?');
 
+    $reaffected = $req->execute(array($profil_img));
 
+        return  $reaffected;
+    }
     public function connected($pseudo,$pass_hache)
     {
         $db = $this->dbConnect();

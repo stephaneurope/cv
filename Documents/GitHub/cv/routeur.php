@@ -1,24 +1,20 @@
 <?php
-namespace  Serri\Cv;
-require_once('controller/FrontendController.php'); 
-//require_once 'app/autoloader.php'; 
-//Autoloader::register(); 
-require_once('controller/BackendController.php');
-require_once('controller/AdminController.php');
-require_once('controller/ContactController.php');
-require_once('app/MessageFlash.php'); 
-//require "/app/vendor/autoload.php";
+namespace  Serri;
+
+require "vendor/autoload.php";
 use Exception;
+
 class Routeur {
 
 
   public function checkUrl(){
-    $ctrlfrontend = new \Serri\Cv\FrontendController;
-    $ctrlBackend = new \Serri\Cv\BackendController();
-    $ctrlAdmin = new \Serri\Cv\AdminController();
-    $ctrlContact = new \Serri\Cv\ContactController();
+    $ctrlfrontend = new \Controller\FrontendController;
+    $ctrlBackend = new \Controller\BackendController();
+    $ctrlAdmin = new \Controller\AdminController();
+    $ctrlContact = new \Controller\ContactController();
+    $ctrlCalendar = new \Controller\CalendarController();
 
-    $tab_action = array("accueil","contact","portfolio","contactForm","cv",'profilPersonnel','experienceProfessionnel','competences','education','boardCv',"portfolioInsert","portfolioInsertAction","connect",'boardFolio','boardPrincipal','projectView','cleanProject','eraseProject','connexion','deconnexion','portfolioModifAction','portfolioModif','updateProfilPersonnel','updateExperienceProfessionnel','updateCompetence','updateEducation','ajoutExPro','cvInsertExpro','InsertComp','ajoutComp','ajoutEduc','cvInsertEduc','deleteExPro','deleteExp','deleteComp','deleteCompet','deleteEduc','deleteEduca','profil','updateProfil');
+    $tab_action = array("accueil","contact","portfolio","contactForm","cv",'profilPersonnel','experienceProfessionnel','competences','education','boardCv',"portfolioInsert","portfolioInsertAction","connect",'boardFolio','boardPrincipal','projectView','cleanProject','eraseProject','connexion','deconnexion','portfolioModifAction','portfolioModif','updateProfilPersonnel','updateExperienceProfessionnel','updateCompetence','updateEducation','ajoutExPro','cvInsertExpro','InsertComp','ajoutComp','ajoutEduc','cvInsertEduc','deleteExPro','deleteExp','deleteComp','deleteCompet','deleteEduc','deleteEduca','profil','updateProfil','updateProImg','instagram');
    
  
 
@@ -95,11 +91,9 @@ class Routeur {
     
       /*********insertion d'un nouveau projet**********/ 
 elseif ($_GET['action'] == 'portfolioInsertAction'){
-  if (isset($_GET['id']) && $_GET['id'] > 0) {
-         $ctrlBackend->portfolioInsertAction(($_FILES['image']['name']),$_POST['description'],$_POST['techno'],$_POST['comment'],$_POST['titre'], $_POST['liens']);}
-         else{
-      throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');
-    }
+  
+         $ctrlBackend->portfolioInsertAction(($_FILES['image']['name']),$_POST['description'],$_POST['techno'],$_POST['comment'],$_POST['titre'], $_POST['liens']);
+        
       }
      
       /*********insertion d'une nouvelle experience professionnelle**********/ 
@@ -155,6 +149,12 @@ elseif ($_GET['action'] == 'cvInsertEduc'){
       /*****************************************************/
       /**************Pages à droit restreint***************/
       /***************************************************/
+/*********page vue du calendrier**********/ 
+        elseif ($_GET['action'] == 'instagram') { 
+        session_start();
+            $ctrlCalendar->instagramView();      
+      }
+
 /*********page vue des projets**********/ 
         elseif ($_GET['action'] == 'projectView') { 
            session_start();
@@ -212,6 +212,14 @@ elseif ($_GET['action'] == 'cvInsertEduc'){
     }
   }
 
+elseif ($_GET['action'] == 'eraseProject'){
+  if (isset($_GET['id']) && $_GET['id'] > 0) {
+$ctrlBackend->eraseProject($_GET['id']);
+}else{
+     throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');
+    }
+
+}
 /*********Affichage de la page de modif d'education**********/ 
      elseif ($_GET['action'] == 'education'){
      session_start();
@@ -344,7 +352,15 @@ elseif ($_GET['action'] == 'updateProfil'){
          $ctrlAdmin->updateProfil($_POST['pseudo'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['web'],$_POST['mobile']);
    
      } 
-    }     
+    }    
+    elseif ($_GET['action'] == 'updateProImg'){
+ 
+   session_start();
+        if($_SESSION['id'] && $_SESSION['pseudo']){ 
+         $ctrlAdmin->updateProImg($_FILES['profil_image']['name']);
+   
+     } 
+    }      
 
 
 /************** connexion et déconnexion *****************/
@@ -352,7 +368,7 @@ elseif ($_GET['action'] == 'connexion'){
  if (!empty($_POST['pseudo']) && !empty($_POST['pass'])){
   $ctrlAdmin->connexion($_POST['pseudo'],$_POST['pass']);} 
   else {
-   $Session = new \Serri\Cv\MessageFlash();
+   $Session = new \App\MessageFlash();
    $Session->setFlash('Tous les champs ne sont pas remplis','');
    header('Location: index.php?action=connect');
 
@@ -372,13 +388,13 @@ elseif ($_GET['action'] == 'portfolioModifAction') {
    
      $ctrlBackend->portfolioModifAction($_GET['id'],($_FILES['image']['name']),$_POST['description'],$_POST['techno'],$_POST['comment'],$_POST['titre'], $_POST['liens']);
 }else{
-     throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');
+     throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir!');
     }
 
 }
 
 
-}else{throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir');}
+}else{throw new Exception('Désolé une erreur est survenue,votre demande n\'a pas pu aboutir!');}
 
    } catch(Exception $e){ // S'il y a eu une erreur, alors...
   session_start();
@@ -389,4 +405,6 @@ elseif ($_GET['action'] == 'portfolioModifAction') {
   }
 
 } 
-} ?>
+} 
+
+?>

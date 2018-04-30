@@ -1,13 +1,7 @@
 <?php
-namespace Serri\Cv;
-    // Chargement des classes
+namespace Controller;
 
-//require_once('model/FolioManager.php');
-//require_once('view/frontend/view.php');
-//require_once('app/MessageFlash.php');
- require "/vendor/autoload.php"; 
-
-
+require "vendor/autoload.php"; 
 
 class BackendController{
   public $titreError = "" ;
@@ -31,12 +25,12 @@ class BackendController{
 
    public function portfolioInsert()
 {
-    $view = new View('portfolioInsert');
+    $view = new \Cv\View('portfolioInsert');
     $view->generer(['titreError'=>$this->titreError, 'descriptionError'=>$this->descriptionError, 'technoError'=>$this->technoError, 'commentError'=>$this->commentError,'imageError'=>$this->imageError,'liensError'=>$this->liensError,'titre'=>$this->titre,'description'=>$this->description,'techno'=>$this->techno,'comment'=>$this->comment,'image'=>$this->image,'liens'=>$this->liens,'isSuccess'=>$this->isSuccess]);
   }
 public function portfolioInsertAction($image, $description, $techno, $comment, $titre,$liens)
 {
-
+ session_start();
     
 
   if(!empty($_POST))
@@ -114,12 +108,12 @@ if(empty($this->titre)){
       }  
     }    
        if($this->isSuccess && $this->isUploadSuccess) {
-    $folioManager = new Serri\Cv\FolioManager();
+    $folioManager = new \Model\FolioManager();
     $portfolio = $folioManager->insertfolio($image, $description, $techno, $comment, $titre, $liens);
-    header('location:index.php?action=portfolioInsert');
+    header('location:index.php?action=boardFolio');
     exit();
 } else {
-    $view = new View('portfolioInsert');
+    $view = new \Cv\View('portfolioInsert');
     $view->generer(
         [
             'titreError'=>$this->titreError,
@@ -146,44 +140,44 @@ if(empty($this->titre)){
 
 public function boardFolio()
 {
-    $folioManager = new \Serri\Cv\FolioManager();
+    $folioManager = new \Model\FolioManager();
     $portfolio = $folioManager->getFolio2(); 
-    $view = new View('boardFolio');
+    $view = new \Cv\View('boardFolio');
     $view->generer(['portfolio' => $portfolio]);
 }
 
 
 public function projectView()
   {
-    $folioManager = new \Serri\Cv\FolioManager();
+    $folioManager = new \Model\FolioManager();
     $portfolio = $folioManager->getFolio($_GET['id']); 
  
   
-    $view = new View('projectView');
+    $view = new \Cv\View('projectView');
     $view->generer(['portfolio'=>$portfolio]);
     
 }
 
 public function cleanProject($folioId){
-       $folioManager = new \Serri\Cv\FolioManager();
+       $folioManager = new \Model\FolioManager();
     $portfolio = $folioManager->getFolio($_GET['id']); 
-       $view = new View('deleteProjectView'); 
+       $view = new \Cv\View('deleteProjectView'); 
        $view->generer(['portfolio'=>$portfolio]);
    }
 
 
  public function eraseProject($folioId){
-       $folioManager = new \Serri\Cv\FolioManager();
-       $deleteLines = $folioManager ->deleteProject($_GET['id']);
+       $folioManager = new \Model\FolioManager();
+       $deleteLines = $folioManager->deleteProject($_GET['id']);
        header('Location: index.php?action=boardFolio');
        exit;
    }
 
 public function portfolioModif($folioId)
 {
-    $folioManager = new \Serri\Cv\FolioManager();
+    $folioManager = new \Model\FolioManager();
     $portfolio = $folioManager->getFolio($_GET['id']); 
-    $view = new View('portfolioModif');
+    $view = new \Cv\View('portfolioModif');
     $view->generer(['titreError'=>$this->titreError, 'descriptionError'=>$this->descriptionError, 'technoError'=>$this->technoError, 'commentError'=>$this->commentError,'imageError'=>$this->imageError,'liensError'=>$this->liensError,'titre'=>$this->titre,'description'=>$this->description,'techno'=>$this->techno,'comment'=>$this->comment,'image'=>$this->image,'liens'=>$this->liens,'isSuccess'=>$this->isSuccess,'portfolio'=>$portfolio]);
       var_dump($_GET['id'] );
   }
@@ -265,10 +259,10 @@ if(empty($this->titre)){
     }    
        if(($this->isSuccess && $this->isImageUpdated && $this->isUploadSuccess)||($this->isSuccess && !$this->isImageUpdated)) {
        
-    $folioManager = new \Serri\Cv\FolioManager();
+    $folioManager = new \Model\FolioManager();
       $portfolio = $folioManager->getFolio($_GET['id']); 
     $reaffected = $folioManager->updateProject($folioId, $image, $description, $techno, $comment, $titre, $liens);
-    $view = new View('portfolioModif');
+    $view = new \Cv\View('portfolioModif');
         $view->generer(
         [
             'titreError'=>$this->titreError,
@@ -289,10 +283,10 @@ if(empty($this->titre)){
     );  
 header('location:index.php?action=boardPrincipal');
 }else{
-  $folioManager = new \Serri\Cv\FolioManager(); 
+  $folioManager = new \Model\FolioManager(); 
 $portfolio = $folioManager->getFolio($_GET['id']); 
     $reaffectedIm = $folioManager->updateProjectNoImage($folioId,$description, $techno, $comment, $titre, $liens);
-      $view = new View('portfolioModif');
+      $view = new \Cv\View('portfolioModif');
         $view->generer(
         [
             'titreError'=>$this->titreError,
@@ -320,28 +314,28 @@ $portfolio = $folioManager->getFolio($_GET['id']);
 
 public function profilPersonnel()
   {
-    $adminManager = new \Serri\Cv\AdminManager();
-   $cvManager = new \Serri\Cv\CvManager();
-$session = new \Serri\Cv\MessageFlash();
+    $adminManager = new \Model\AdminManager();
+   $cvManager = new \Model\CvManager();
+$session = new \App\MessageFlash();
  $result = $adminManager->identity();
 
    $proCv = $cvManager->getProCv();
    
-   $view = new View('profilPersonnel');
+   $view = new \Cv\View('profilPersonnel');
    $view->generer(['proCv' => $proCv,'result' => $result,'session' => $session]);
     
 }
 public function updateProfilPersonnel($profil)
   {
     if (!empty($_POST['profil'])) {
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $affected = $cvManager->updateProCv($profil);
-      $session = new \Serri\Cv\MessageFlash();
+      $session = new \App\MessageFlash();
         $session->setFlash('Le profil Personnel à été modifié','');
         header('location:index.php?action=profilPersonnel');
         exit;
     }else{
-        $session = new \Serri\Cv\MessageFlash();
+        $session = new \App\MessageFlash();
         $session->setFlash('Tous les champs ne sont pas remplis','');
         header('location:index.php?action=profilPersonnel');
         exit;
@@ -351,36 +345,36 @@ public function updateProfilPersonnel($profil)
 }
 public function experienceProfessionnel()
   {
-    $adminManager = new \Serri\Cv\AdminManager();
-   $cvManager = new \Serri\Cv\Model\CvManager();
+    $adminManager = new \Model\AdminManager();
+   $cvManager = new \Model\CvManager();
    $expCv = $cvManager->getExpCv();
  $result = $adminManager->identity();
- $session = new \Serri\Cv\MessageFlash();
-   $view = new View('experienceProfessionnel');
+ $session = new \App\MessageFlash();
+   $view = new \Cv\View('experienceProfessionnel');
    $view->generer(['expCv' => $expCv,'result' => $result,'session' => $session]);
     
 }
 public function ajoutExPro()
   {
-   $adminManager = new \Serri\Cv\AdminManager();
+   $adminManager = new \Model\AdminManager();
    $result = $adminManager->identity();
-   $session = new \Serri\Cv\MessageFlash();
-   $view = new View('ajoutExProView');
+   $session = new \App\MessageFlash();
+   $view = new \Cv\View('ajoutExProView');
    $view->generer(['result' => $result,'session' => $session]);
     
 }
 public function updateExperienceProfessionnel($expId,$title,$period,$description)
   {
     if (!empty($_POST['title'] && !empty($_POST['period'])&& !empty($_POST['description']))) {
-    $adminManager = new \Serri\Cv\AdminManager();
-   $cvManager = new \Serri\Cv\CvManager();
+    $adminManager = new \Model\AdminManager();
+   $cvManager = new \Model\CvManager();
    $req = $cvManager->updateExpCv($expId,$title,$period,$description);
-   $session = new \Serri\Cv\MessageFlash();
+   $session = new \App\MessageFlash();
         $session->setFlash('Votre expérience professionnelle à été modifiée','');
        header('location:index.php?action=experienceProfessionnel');
         exit;
     }else{
-      $session = new \Serri\Cv\MessageFlash();
+      $session = new \App\MessageFlash();
         $session->setFlash('Tous les champs ne sont pas remplis','');
         header('location:index.php?action=experienceProfessionnel');
         exit;
@@ -390,12 +384,12 @@ public function updateExperienceProfessionnel($expId,$title,$period,$description
 public function insertExPro($title,$period,$description)
   {
      if (!empty(htmlspecialchars(ltrim($_POST['title']))) && !empty(htmlspecialchars(ltrim($_POST['period']))) && !empty(htmlspecialchars(ltrim($_POST['description'])))){
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $affected = $cvManager->insertExpCv($title,$period,$description);
-   $session = new \Serri\Cv\MessageFlash();
+   $session = new \App\MessageFlash();
    $session->setFlash('Votre commentaire a bien été ajouté','');
    header('location:index.php?action=experienceProfessionnel');}else{
-          $Session = new \Serri\Cv\MessageFlash();
+          $Session = new \App\MessageFlash();
           $Session->setFlash('Vous n\'avez pas rempli tous les champs',''); 
           header('location:index.php?action=experienceProfessionnel');
           exit;
@@ -404,17 +398,17 @@ public function insertExPro($title,$period,$description)
 }
 public function deleteExp()
   {
-    $adminManager = new \Serri\Cv\AdminManager();
-  $cvManager = new \Serri\Cv\CvManager();
+    $adminManager = new \Model\AdminManager();
+  $cvManager = new \Model\CvManager();
    $expCv = $cvManager->getExpCv();
    $result = $adminManager->identity();
-   $view = new View('deleteExpView');
+   $view = new \Cv\View('deleteExpView');
    $view->generer(['expCv' => $expCv,'result' => $result]);
     
 }
 public function deleteExPro($id)
   {
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $affected = $cvManager->deleteExpCv($_GET['id']);
  
    header('location:index.php?action=experienceProfessionnel');
@@ -423,37 +417,37 @@ public function deleteExPro($id)
 
 public function competences()
   {
-    $adminManager = new \Serri\Cv\AdminManager();
-   $cvManager = new \Serri\Cv\CvManager();
+    $adminManager = new \Model\AdminManager();
+   $cvManager = new \Model\CvManager();
    $avCv = $cvManager->getAvCv();
-   $view = new View('competences');
+   $view = new \Cv\View('competences');
    $result = $adminManager->identity();
-   $session = new \Serri\Cv\MessageFlash();
+   $session = new \App\MessageFlash();
    $view->generer(['avCv' => $avCv,'result' => $result, 'session' => $session]);
    
 }
 public function ajoutComp()
   {
 
-  $adminManager = new \Serri\Cv\AdminManager();
+  $adminManager = new \Model\AdminManager();
  $result = $adminManager->identity();
-   $view = new View('ajoutCompView');
-    $session = new \Serri\Cv\MessageFlash();
+   $view = new \Cv\View('ajoutCompView');
+    $session = new \App\MessageFlash();
    $view->generer(['result' => $result,'session' => $session]);
     
 }
 public function updateCompetence($avId,$avantage)
   {
     if (!empty($_POST['avantage'])) {
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $affected = $cvManager->updateAvCv($avId,$avantage);
    
-$session = new \Serri\Cv\MessageFlash();
+$session = new \App\MessageFlash();
         $session->setFlash('Vos compétences ont été modifiées','');
       header('location:index.php?action=competences');
         exit;
     }else{
-      $session = new \Serri\Cv\MessageFlash();
+      $session = new \App\MessageFlash();
         $session->setFlash('Tous les champs ne sont pas remplis','');
         header('location:index.php?action=competences');
         exit;
@@ -462,12 +456,12 @@ $session = new \Serri\Cv\MessageFlash();
 public function insertCompetence($avantage)
   {
      if (!empty(htmlspecialchars(ltrim($_POST['avantage'])))){
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $affected = $cvManager->insertAvCv($avantage);
-   $session = new \Serri\Cv\MessageFlash();
+   $session = new \App\MessageFlash();
    $session->setFlash('Votre competence a bien été ajouté','');
    header('location:index.php?action=competences');}else{
-          $Session = new \Serri\Cv\MessageFlash();
+          $Session = new \App\MessageFlash();
           $Session->setFlash('Vous n\'avez pas rempli tous les champs',''); 
           header('location:index.php?action=ajoutComp');
           exit;
@@ -476,17 +470,17 @@ public function insertCompetence($avantage)
 }
 public function deleteCompetences()
   {
-    $adminManager = new \Serri\Cv\AdminManager();
-   $cvManager = new \Serri\Cv\Model\CvManager();
+    $adminManager = new \Model\AdminManager();
+   $cvManager = new \Model\CvManager();
    $avCv = $cvManager->getAvCv();
    $result = $adminManager->identity();
-   $view = new View('deleteCompView');
+   $view = new \Cv\View('deleteCompView');
    $view->generer(['avCv' => $avCv,'result'=> $result]);
    
 }
 public function deleteCompet($id)
   {
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $affected = $cvManager->deleteAvCv($_GET['id']);
  
    header('location:index.php?action=competences');
@@ -495,36 +489,36 @@ public function deleteCompet($id)
 
 public function education()
   {
-   $adminManager = new \Serri\Cv\AdminManager();
-   $cvManager = new \Serri\Cv\CvManager();
+   $adminManager = new \Model\AdminManager();
+   $cvManager = new \Model\CvManager();
    $edCv = $cvManager->getEdCv();
    $result = $adminManager->identity();
-   $view = new View('education');
-   $session = new \Serri\Cv\MessageFlash();
+   $view = new \Cv\View('education');
+   $session = new \App\MessageFlash();
    $view->generer(['edCv' => $edCv,'result' => $result,'session' => $session]);
     
 }
 public function ajoutEduc()
   {
-  $adminManager = new \Serri\Cv\AdminManager();
+  $adminManager = new \Model\AdminManager();
  $result = $adminManager->identity();
-   $view = new View('ajoutEducView');
-   $session = new \Serri\Cv\MessageFlash();
+   $view = new \Cv\View('ajoutEducView');
+   $session = new \App\MessageFlash();
    $view->generer(['result' => $result,'session' =>$session]);
     
 }
 public function updateEducation($edId,$title_education,$title_secondary,$description_education)
   {
     if (!empty($_POST['title_education'] && !empty($_POST['title_secondary'])&& !empty($_POST['description_education']))) {
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $update = $cvManager->updateEdCv($edId,$title_education,$title_secondary,$description_education);
   
-  $session = new \Serri\Cv\MessageFlash();
+  $session = new \App\MessageFlash();
         $session->setFlash('Votre parcours scolaire à été modifiée','');
         header('location:index.php?action=education');
         exit;
     }else{
-      $session = new \Serri\Cv\MessageFlash();
+      $session = new \App\MessageFlash();
         $session->setFlash('Tous les champs ne sont pas remplis','');
          header('location:index.php?action=education');
         exit;
@@ -533,12 +527,12 @@ public function updateEducation($edId,$title_education,$title_secondary,$descrip
 public function insertEducation($title_education,$title_secondary,$description_education)
   {
     if (!empty(htmlspecialchars(ltrim($_POST['title_education']))) && !empty(htmlspecialchars(ltrim($_POST['title_secondary']))) && !empty(htmlspecialchars(ltrim($_POST['description_education'])))){
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $affected = $cvManager->insertEdCv($title_education,$title_secondary,$description_education);
-   $session = new \Serri\Cv\MessageFlash();
+   $session = new \App\MessageFlash();
    $session->setFlash('Votre parcours scolaire a bien été ajouté','');
    header('location:index.php?action=education');}else{
-          $Session = new \Serri\Cv\MessageFlash();
+          $Session = new \App\MessageFlash();
           $Session->setFlash('Vous n\'avez pas rempli tous les champs',''); 
           header('location:index.php?action=ajoutEduc');
           exit;
@@ -547,10 +541,10 @@ public function insertEducation($title_education,$title_secondary,$description_e
 }
 public function deleteEducation()
   {
-    $adminManager = new \Serri\Cv\AdminManager();
-   $cvManager = new \Serri\Cv\CvManager();
+    $adminManager = new \Model\AdminManager();
+   $cvManager = new \Model\CvManager();
    $edCv = $cvManager->getEdCv();
-   $view = new View('deleteEducView');
+   $view = new \Cv\View('deleteEducView');
    $result = $adminManager->identity();
  $view->generer(['edCv' => $edCv,'result' => $result]);
     
@@ -558,7 +552,7 @@ public function deleteEducation()
 
 public function deleteEduca($id)
   {
-   $cvManager = new \Serri\Cv\CvManager();
+   $cvManager = new \Model\CvManager();
    $affected = $cvManager->deleteEdCv($_GET['id']);
  
    header('location:index.php?action=education');
@@ -568,21 +562,21 @@ public function deleteEduca($id)
 
 public function boardCv()
   {
- $view = new View('boardCv');
+ $view = new \Cv\View('boardCv');
  $view->generer([]);    
 }
 
 public function boardPrincipal()
   {
-    $session = new \Serri\Cv\MessageFlash();
- $view = new View('interface');
+    $session = new \App\MessageFlash();
+ $view = new \Cv\View('interface');
  $view->generer(['session' => $session]);    
 }
 
 
 public function connect(){ 
- $session = new \Serri\Cv\MessageFlash();
- $view = new View('connectView'); 
+ $session = new \App\MessageFlash();
+ $view = new \Cv\View('connectView'); 
  $view->generer(['session' => $session]);
 }
 

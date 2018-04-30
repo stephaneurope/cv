@@ -1,6 +1,6 @@
 <?php 
 
-namespace Serri\Cv;
+namespace Cv;
 
 class View {
 

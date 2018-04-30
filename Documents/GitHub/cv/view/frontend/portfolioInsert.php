@@ -1,7 +1,7 @@
 <?php  include "menu.php" ;
 
 ?>
-<br><br><br><br>
+  <br><br><br><br>
         <div class="container admin">
             <div class="row">
               
@@ -21,21 +21,13 @@
                         </div>
 
 
-                         <!--<div class="form-group">
-                        <label for="category">Technologies:</label>
-                        <select class="form-control" id="technologies" placeholder="technologies" name="techno" >    <option value="<i class='fab fa-html5 fa-3x'></i>">html</option> 
-                           <option value="<i class='fab fa-css3-alt fa-3x'></i>">css</option>   
-                           <option value="<i class='fab fa-js fa-3x'></i>">javascript</option> 
-                        </select>
-                             <span class="help-inline"></span>
-                        </div>-->
-
-
    <div class="form-group">
       <label for="techno">Technologies:</label><br>
-      <input type="checkbox" checked="checked" name="techno" id="techno" value="<i class='fab fa-html5 fa-3x'></i>" /> <label for="techno">html</label><br>
-       <input type="checkbox" name="techno" id="techno" value="<i class='fab fa-css3-alt fa-3x'></i>"/> <label for="techno">css</label><br>
-       <input type="checkbox" name="techno" id="techno" value="<i class='fab fa-js fa-3x'></i>"/> <label for="techno">javascript</label>
+      <input type="checkbox" class="chkbx" id="techno" value="<i class='fab fa-html5 fa-3x'></i>" /> <label for="techno">html</label><br>
+       <input type="checkbox" class="chkbx" id="techno" value="<i class='fab fa-css3-alt fa-3x'></i>" style="color:orange;"/> <label for="techno">css</label><br>
+           <input type="checkbox" class="chkbx"  id="techno" value="<i class='fab fa-js fa-3x'></i>"/> <label for="techno">javascript</label>
+           <br>
+       <div class="selectedtext"><textarea type="text" name='techno' class="mceNoEditor" id='selectedtext' placeholder="SelectednCheckboxs"></textarea></div>
        <span class="help-inline"></span>
    </div>
                  
@@ -62,7 +54,7 @@
                     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Ajouter</button>
                     <a class="btn btn-primary" href="index.php?action=boardFolio"><span class="glyphicon glyphicon-arrow-left"> Retour</span></a>
                     </div>
-                  
+                  <br> <br>   
                 </form>
                 <br> <br>   
                 

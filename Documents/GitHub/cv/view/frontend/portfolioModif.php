@@ -19,37 +19,17 @@
                         <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="<?= $portfolio['description']?>">
                              <span class="help-inline"><?php echo $descriptionError ;?></span>
                         </div>
-
-
-                        <!--<div class="form-group">
-                        <label for="category">Technologies:</label>
-                        <select class="form-control" id="technologies" placeholder="technologies" name="techno" >    <option value="<i class='fab fa-html5 fa-3x'></i>">html</option> 
-                           <option value="<i class='fab fa-html5 fa-3x'></i>">html</option>   
-                           <option value="<i class='fab fa-html5 fa-3x'></i>">html</option> 
-                        </select>
-                             <span class="help-inline"></span>
-                        </div>-->
-
-<!-- <div class="form-group">
-      <label for="techno">Technologies:</label></br>
-    
-       <input type="checkbox" name="techno[]" id="techno" value="<i class='fab fa-html5 fa-3x'></i>" /> <label for="techno">html</label><br />
-       <input type="checkbox" name="techno[]" id="techno" value="<i class='fab fa-css3-alt fa-3x'></i>"/> <label for="techno">css</label><br />
-       <input type="checkbox" name="techno[]" id="techno" value="<i class='fab fa-js fa-3x'></i>"/> <label for="techno">javascript</label>
-
-<span class="help-inline"></span>-->
 <div class="form-group">
-                        <label for="techno">Technologie:</label>
-                        <input type="" step="" class="form-control" id="" name="techno" value=""
-                             <span class="help-inline"><?php echo $commentError ;?></span>
-                        </div>
-                        </div>
-                       <!-- <div class="form-group">
-                        <label for="techno">technologies:</label>
-                        <input type="" step="" class="form-control" id="" name="techno" value="">
-                             <span class="help-inline"><?php echo $technoError ;?></span>
+      <label for="techno">Technologies:</label><br>
+      <input type="checkbox" class="chkbx"  name="" id="techno" value="<i class='fab fa-html5 fa-3x'></i>" /> <label for="techno">html</label><br>
+       <input type="checkbox" class="chkbx" name="" id="techno" value="<i class='fab fa-css3-alt fa-3x'></i>"/> <label for="techno">css</label><br>
+       <input type="checkbox" class="chkbx" name="" id="techno" value="<i class='fab fa-js fa-3x'></i>"/> <label for="techno">javascript</label>
+       <div class="selectedtext"><textarea type="text" name='techno' class="mceNoEditor" id='selectedtext' placeholder="SelectednCheckboxs"></textarea></div>
+       <span class="help-inline"></span>
+   </div>
 
-                        </div>-->
+<span class="help-inline"></span>
+
 
                         <div class="form-group">
                         <label for="comment">Commentaire:</label>

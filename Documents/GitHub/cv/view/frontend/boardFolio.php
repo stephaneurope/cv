@@ -1,6 +1,6 @@
 
     <?php  include "menu.php" ?>
-        <div>
+        <div class="all">
             <div class="container admin">
                 <br><br>
                 <div class="flashconnect">

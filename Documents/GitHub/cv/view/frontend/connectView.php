@@ -1,5 +1,6 @@
 
 <?php  include "menu.php" ?>
+<section style='background: #fff;'>
     <div id="login" class="span3 well well-large offset4">
         <div class="centreConnect">
             <h4>Connexion</h4>
@@ -17,3 +18,4 @@
             <?php $session->flash();?>
         </div>
     </div>
+    </section>

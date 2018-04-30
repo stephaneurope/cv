@@ -1,14 +1,9 @@
 <?php
-namespace Serri\Cv;
+namespace Controller;
 
-    // Chargement des classes
-//require_once('model/AdminManager.php');
-//require_once('model/FolioManager.php');
-//require_once('model/CvManager.php');
-//require_once('view/frontend/view.php');
-//require_once('app/MessageFlash.php');
+require_once('app/MessageFlash.php');
 
-require "/vendor/autoload.php"; 
+require "vendor/autoload.php"; 
 
 
 class FrontendController{
@@ -16,21 +11,21 @@ class FrontendController{
   
   public function accueil()
   {
-    $adminManager = new \Serri\Cv\AdminManager();
+    $adminManager = new \Model\AdminManager();
     $result = $adminManager->identity();  
-    $folioManager = new \Serri\Cv\FolioManager();
+    $folioManager = new \Model\FolioManager();
     $portfolio = $folioManager->getFolio2(); 
-    $view = new \Serri\Cv\View('accueilView');
+    $view = new \Cv\View('accueilView');
     $view->generer(['portfolio' => $portfolio,'result'=> $result]);
     
 }
 public function portfolio()
   {
-    $folioManager = new \Serri\Cv\FolioManager();
+    $folioManager = new \Model\FolioManager();
     $portfolio = $folioManager->getFolio($_GET['id']); 
     $portfol = $folioManager->getFolio2(); 
   
-    $view = new \Serri\Cv\View('portfolioView');
+    $view = new \Cv\View('portfolioView');
     $view->generer(['portfolio'=>$portfolio,'portfol'=>$portfol]);
     
 }
@@ -41,14 +36,14 @@ public function portfolio()
 public function cv()
   {
    
-    $adminManager = new \Serri\Cv\AdminManager();
-    $cvManager = new \Serri\Cv\CvManager();
+    $adminManager = new \Model\AdminManager();
+    $cvManager = new \Model\CvManager();
     $result = $adminManager->identity();  
     $proCv = $cvManager->getProCv();
     $expCv = $cvManager->getExpCv();
     $avCv = $cvManager->getAvCv();
     $edCv = $cvManager->getEdCv();
-    $view = new \Serri\Cv\View('cvView');
+    $view = new \Cv\View('cvView');
 
     $view->generer(['proCv' => $proCv,'expCv' => $expCv,'avCv' => $avCv,'edCv' => $edCv, 'result' => $result]);
     
@@ -58,7 +53,7 @@ public function cv()
 public function error()
 {
      
-    $view = new View('errorView');
+    $view = new \Cv\View('errorView');
     $view->generer([]);
     
 }
