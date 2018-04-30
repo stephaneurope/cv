@@ -38,5 +38,5 @@
                     <a class="btn btn-primary" href="index.php?action=boardFolio"><span class="glyphicon glyphicon-arrow-left"> Retour</span></a>
                     </div>
 </div>
-
+<br><br><br><br><br><br>
 </section>

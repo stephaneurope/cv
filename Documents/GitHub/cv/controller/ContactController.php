@@ -1,19 +1,32 @@
 <?php
 
-namespace Forteroche\Blog;
-require_once('app/MessageFlash.php');
+namespace Serri\Cv;
+
 class ContactController{
 
 
     public $email;
     public $phone;
     public $data;
+    public  $firstnameError = '';
+    public $nameError =  '';
+     public $phoneError =  '';
+    public  $mailError =  '';
+    public  $messageError = '' ;
+    public $message1 = '';
      
+public function contact()
+  {
 
+     
+       $view = new View('contactView');
+       $view->generer(['firstnameError'=>$this->firstnameError, 'nameError'=>$this->nameError,'phoneError'=>$this->phoneError, 'mailError'=>$this->mailError,'messageError'=>$this->messageError, 'message1' =>$this->message1]);
+    
+}
 public function contactForm() {
 
-     $firstname = $name = $email = $phone = $message = "";
-     $firstnameError = $nameError = $emailError = $phoneError = $messageError = "";
+     $firstname = $name = $this->email = $this->phone = $message = "";
+     $this->firstnameError = $this->nameError = $this->mailError = $this->phoneError = $this->messageError = "";
      $isSuccess = false;
      $emailTo = "serri.stephan@gmail.com";
     if ($_SERVER["REQUEST_METHOD"] == "POST")
@@ -28,11 +41,10 @@ public function contactForm() {
         
         if (empty($firstname))
         {
-       $session1 = new \Forteroche\Blog\MessageFlash();
-        $session1->setFlash('Vous n\'avez pas renseigné votre nom','');
 
+         $this->firstnameError ='Vous n\'avez pas renseigné votre prénom';
+         $isSuccess = false;
 
-        $isSuccess = false; 
         } 
         else
         {
@@ -41,8 +53,8 @@ public function contactForm() {
 
         if (empty($name))
         {
-            $session2 = new \Forteroche\Blog\MessageFlash();
-            $session2->setFlash("Et oui je veux tout savoir. Même ton nom !",'');
+      
+        $this->nameError = "Et oui je veux tout savoir. Même ton nom !";
             $isSuccess = false; 
         } 
         else
@@ -52,8 +64,8 @@ public function contactForm() {
 
         if(!$this->isEmail($email)) 
         {
-            $session3 = new \Forteroche\Blog\MessageFlash();
-            $session3->setFlash("T'essaies de me rouler ? C'est pas un email ça  !",'');
+          
+         $this->mailError ="T'essaies de me rouler ? C'est pas un email ça  !";
             $isSuccess = false; 
         } 
         else
@@ -63,8 +75,7 @@ public function contactForm() {
 
         if (!$this->isPhone($phone))
         {
-             $session4 = new \Forteroche\Blog\MessageFlash();
-            $session4->setFlash("Que des chiffres et des espaces, stp...",'');
+          $this->phoneError = "Que des chiffres et des espaces, stp...";
            $isSuccess = false; 
         }
         else
@@ -75,8 +86,7 @@ public function contactForm() {
         if (empty($message))
         {
 
-             $session5 = new \Forteroche\Blog\MessageFlash();
-            $session5->setFlash("Qu'est-ce que tu veux me dire ?",'');
+           $this->messageError ="Qu'est-ce que tu veux me dire ?";
             $isSuccess = false; 
         }
         else
@@ -86,14 +96,20 @@ public function contactForm() {
         
         if($isSuccess) 
         {
+            
             $headers = "From: $firstname $name' <$email>\r\nReply-To: $email";
-            mail($emailTo, "Un message de votre site", $emailText, $headers);
+            mail($emailTo, "Un message de serri-stephan.com", $emailText, $headers);
              $firstname = $name = $email = $phone = $message = "";
+             $this->message1 = 'Votre message a bien été envoyé!! Merci!';
         }
         
         //echo json_encode($array);
         
    } 
+
+   $view = new View('contactView');
+       $view->generer(['firstnameError'=>$this->firstnameError, 'nameError'=>$this->nameError,'phoneError'=>$this->phoneError, 'mailError'=>$this->mailError,'messageError'=>$this->messageError,'message1' =>$this->message1]);
+
 }
     public function isEmail($email) 
     {

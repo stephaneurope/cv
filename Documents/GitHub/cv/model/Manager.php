@@ -1,5 +1,6 @@
 <?php
-namespace Forteroche\Blog\Model;
+namespace Serri\Cv;
+
 class Manager
 {
 	protected function dbConnect()

@@ -1,11 +1,17 @@
 /* GENERAL*/
 html{
     background: #181818;
+    height: 100%;
+
 
 }
 body
 {
     font-family: "Lato",sans-serif;
+    height: 100%;
+  margin: 0;
+  padding: 0;
+
 
 }
 h1,h2,h3,h4,h5,h6
@@ -49,6 +55,9 @@ section .heading h2
     height: 2px;
     background: #d82c2e;
     margin: 100px auto; /*centre l'lelement*/  
+}
+.contact{
+    margin-bottom: 100px;
 }
 /*MENU*/
 .navbar
@@ -322,6 +331,71 @@ education-block .red-divider
     color: #fff;
     text-decoration: none;
 }
+/*************login*********************/
+                    
+                    #login {
+                        margin-top: 50vh;
+                        /* poussé de la moitié de hauteur de viewport */
+                        transform: translateY(-50%);
+                        /* tiré de la moitié de sa propre hauteur */
+                        margin-left: auto;
+                        margin-right: auto;
+                        box-shadow: 0 0 18px #ccc;
+                        max-width: 500px;
+                        text-align: center;
+                    }
+                    
+                    #login form {
+                        text-align: center;
+                    }
+                    
+                    #login input {
+                        text-align: center;
+                    }
+   /***************Messages Flash et Autres***********************/
+                    
+                    .flash {
+                        margin-right: auto;
+                        margin-top: 10px;
+                        font-weight: bold;
+                        box-shadow: 0 0 18px #ccc;
+                        width: 50%;
+                        text-align: center;
+                    }
+                    
+                    .flashconnect {
+                        margin-left: auto;
+                        margin-right: auto;
+                        margin-top: 10px;
+                        font-weight: bold;
+                        box-shadow: 0 0 18px #ccc;
+                        width: 50%;
+                        text-align: center;
+                    }
+                    
+                    .noRequest  {
+                        padding: 20px;
+                        text-align: center;
+                        font-size: 2em;
+                        background-color:  #00a6d6;
+                        width:50%;
+                        margin:0 auto;
+                        border-radius:5px;
+
+                    }
+
+                    .noComment  {
+                        padding: 10px;
+                        text-align: center;
+                        font-size:1.1em;
+                        font-weight: bold;
+                        border:2px solid  #00a6d6;
+                        width:70%;
+                        margin:0 auto;
+                        background-color: #fff;
+                        
+
+                    }                 
 /*PORTFOLIO*/
 #portfolio
 {
@@ -379,9 +453,14 @@ education-block .red-divider
 /* FOOTER */
 footer
 {
-    background: #333;
-    padding 20px 0 40px;
 
+    background: #333;
+    padding :0;
+}
+.foot{
+
+    bottom: 0;
+    width:100%;
 }
 footer .glyphicon
 {
@@ -499,4 +578,8 @@ padding:20px;
     text-transform: uppercase;
     padding: 18px;
 
+}
+.admin{
+    height:100%;
+    margin-top:50px;
 }

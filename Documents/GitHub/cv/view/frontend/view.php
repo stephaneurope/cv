@@ -1,5 +1,7 @@
 <?php 
-namespace Forteroche\Blog;
+
+namespace Serri\Cv;
+
 class View {
 
   // Nom du fichier associé à la vue

@@ -42,7 +42,7 @@ Je serai votre interlocuteur unique et privilégié.</p>
 Au plaisir d’entamer une belle collaboration avec vous !</p></div>
 </div>
     </section>
-<div class="container">
+<div class="container contact">
             <div class="divider"></div>
             <div class="heading">
                 <h2>Contactez-moi</h2>
@@ -50,36 +50,40 @@ Au plaisir d’entamer une belle collaboration avec vous !</p></div>
                 
            <div class="row">
                <div class="col-lg-10 col-lg-offset-1">
-                    <form id="contact-form" method="post" action='contactForm' role="form">
+                    <form id="contact-form" method="post" action='index.php?action=contactForm' role="form">
                         <div class="row">
-                            <div class="col-md-6">
-                                <label for="firstname">Nom <span class="blue">*</span></label>
-                                <input id="firstname" type="text" name="firstname" class="form-control" placeholder="Votre Prénom">
                             
-                            </div>
+
                             <div class="col-md-6">
                                 <label for="name">Nom <span class="blue">*</span></label>
                                 <input id="name" type="text" name="name" class="form-control" placeholder="Votre Nom">
-                                <p class="comments"></p>  
+                                <p class="comments"><?= $nameError ?></p>
+                              </div>
+
+                              <div class="col-md-6">
+                                <label for="firstname">Prénom <span class="blue">*</span></label>
+                                <input id="firstname" type="text" name="firstname" class="form-control" placeholder="Votre Prénom">
+                                <p class="comments"><?= $firstnameError ?></p>
                             </div>
+                            
                             <div class="col-md-6">
                                 <label for="email">Email <span class="blue">*</span></label>
                                 <input id="email" type="text" name="email" class="form-control" placeholder="Votre Email">
-                                <p class="comments"></p>
-                               
-                            </div>
+                                <p class="comments"><?= $mailError ?></p>
+                              </div>
+                            
                             <div class="col-md-6">
                                 <label for="phone">Téléphone</label>
                                 <input id="phone" type="tel" name="phone" class="form-control" placeholder="Votre Téléphone">
-                                <p class="comments"></p>
-                               
+                                <p class="comments"><?= $phoneError ?></p>
                             </div>
+                            
                             <div class="col-md-12">
                                 <label for="message">Message <span class="blue">*</span></label>
                                 <textarea id="message" name="message" class="form-control mceNoEditor" placeholder="Votre Message" rows="4"></textarea>
-                                <p class="comments"></p>
-                               
-                            </div>
+                                <p class="comments"><?= $messageError ?></p>
+                           </div>
+                            
                             <div class="col-md-12">
                                 <p class="blue"><strong>* Ces informations sont requises.</strong></p>
                             </div>
@@ -87,7 +91,7 @@ Au plaisir d’entamer une belle collaboration avec vous !</p></div>
                                 <input type="submit" class="button2" value="Envoyer">
                             </div>    
                         </div>
-                        <p class="thank-you"></p>
+                        <p class="thank-you"><?= $message1 ?></p>
                     </form>
                 </div>
            </div>

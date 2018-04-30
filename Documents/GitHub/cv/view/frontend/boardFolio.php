@@ -2,15 +2,16 @@
     <?php  include "menu.php" ?>
         <div>
             <div class="container admin">
+                <br><br>
                 <div class="flashconnect">
-               <br><br><br>
+             
                 </div>
                 <div class="row">
-                    <h1><strong>Tableau de bord </strong><a href="index.php?action=portfolioInsert" class="btn btn-success btn-lg pad"><span class="glyphicon glyphicon-plus"></span>  Ajout Projet</a></h1>
+                    <h1><strong>Projets </strong><a href="index.php?action=portfolioInsert" class="btn btn-success btn-lg pad"><span class="glyphicon glyphicon-plus"></span>  Ajout Projet</a></h1>
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Chapitres</th>
+                                <th>Projets</th>
                      
                                 <th>Actions</th>
                             </tr>
@@ -28,4 +29,5 @@
                         </tbody>
                     </table>
                 </div>
+                <a href="index.php?action=boardPrincipal" class="btn btn-primary  pad"><span class="glyphicon glyphicon-arrow-left">  Retour</a>
             </div>

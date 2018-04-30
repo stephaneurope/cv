@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -60,11 +61,11 @@
             <?= $content ?>
         </div>
 
-   
-    <footer class="text-center container-fluid">
+     <br><br><br>
+    <footer class="text-center container-fluid foot navbar-fixed-bottom">
 
         <a href="#about"> <span class="glyphicon glyphicon-chevron-up"></span>  </a><br>
-        <a style='color:#fff;'>connexion</a>
+     <?php if (!$_SESSION) { ?>   <a href="index.php?action=connect" style='color:#fff;'>connexion</a><?php } else { ?><a href="index.php?action=deconnexion" style='color:#fff;'>déconnexion</a><br><a href="index.php?action=boardPrincipal" style='color:#fff;''>administration</a><?php } ?>
         <h5>© 2018 SERRI-STEPHAN.COM</h5></footer>
 </body>
 

@@ -7,10 +7,13 @@
                
   
     <section id="about" class="container-fluid">
-        <div class="col-xs-8 col-md-4 profile-picture"> <img src="/cv/public/images/me1.jpg" alt="Stephan" class="img-circle"> </div>
+       
+        <div class="col-xs-8 col-md-4 profile-picture"> <img src="/cv/public/images/me3.jpg" alt="Stephan" class="img-circle img-responsive"> </div>
         <div class="heading">
-            <h1>Bonjour, c'est moi Stephan</h1>
-            <h3>Développeur Web</h3> 
+             <?php while ($data0 = $result->fetch()){  ?>
+            <h1>Bonjour, c'est moi <?=$data0['prenom']; ?></h1>
+            <h3><?=$data0['works']; ?></h3> 
+       <?php }  ?>     
     </section>
     <section id="skills">
         <div class="red-divider"></div>
