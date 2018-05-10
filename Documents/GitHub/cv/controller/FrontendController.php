@@ -1,7 +1,7 @@
 <?php
 namespace Controller;
 
-require_once('app/MessageFlash.php');
+//require_once('app/MessageFlash.php');
 
 require "vendor/autoload.php"; 
 
@@ -24,7 +24,6 @@ public function portfolio()
     $folioManager = new \Model\FolioManager();
     $portfolio = $folioManager->getFolio($_GET['id']); 
     $portfol = $folioManager->getFolio2(); 
-  
     $view = new \Cv\View('portfolioView');
     $view->generer(['portfolio'=>$portfolio,'portfol'=>$portfol]);
     

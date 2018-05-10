@@ -6,7 +6,7 @@
     ?>
 <!-- Page Content -->
 
-<section>
+<section id="folio">
     <div class="container">
 
       <!-- Portfolio Item Heading -->
@@ -20,7 +20,7 @@
 
         <div class="col-md-8">
 
-          <img class="rounded mx-auto d-block img-thumbnail" src='/cv/public/images/<?= $portfolio['image'] ?>' alt="">
+          <img  id ="d-block" class="rounded  img-thumbnail" src='/cv/public/images/<?= $portfolio['image'] ?>' alt="">
         </div>
   
         <div class="col-md-4">
@@ -57,13 +57,13 @@
                
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
-                        <a class="thumbnail" href="" target="_blank"> <img src="/cv/public/images/forteroche.png" > </a></div>
+                        <a class="thumbnail" href="" target="_blank"> <img src="/cv/public/images/portfolio.jpeg" class="img-responsive " > </a></div>
                     
              
                      <?php while ($data = $portfol->fetch())
                       { ?>
                     <div class="item ">
-                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src="/cv/public/images/<?php echo $data['image'] ; ?>" alt="site agence web"> </a></div><?php  } ?>
+                        <a class="thumbnail" href="index.php?action=portfolio&amp;id= <?php echo $data['id'] ?>" target=""> <img src="/cv/public/images/<?php echo $data['image'] ; ?>" alt="site agence web" class="img-responsive"> </a></div><?php  } ?>
                     
                 </div>
                <a class="left carousel-control" href="#myCarousel" data-slide="prev" role="button"> <span class="glyphicon glyphicon-chevron-left"></span> </a>

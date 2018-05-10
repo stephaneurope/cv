@@ -36,11 +36,10 @@
     <script src="https://code.jquery.com/jquery-1.12.3.js" integrity="sha256-1XMpEtA4eKXNNpXcJ1pmMPs8JV+nwLdEqwiJeCQEkyc=" crossorigin="anonymous"></script>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=i9qtcs3a3bdsajmuw9vustqee9f5wd2z1pnc8mpv2bjzzzn0
 "></script>
-<script src="public/js/script.js"></script>
+<script src="public/js/impression.js"></script>
+<script src="public/js/checkbox.js"></script>
 <script src="public/js/ajax.js"></script>
 <script src="public/js/instagram.js"></script>
-
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=i9qtcs3a3bdsajmuw9vustqee9f5wd2z1pnc8mpv2bjzzzn0"></script>
     <script>
         tinymce.init({
             selector: "textarea"
@@ -60,14 +59,13 @@
 </title>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="60">
-   
- <div>
+ <div class='page'>  
+ <main class="site-content">
             <?= $content ?>
-        </div>
+        </main>
+</div>
 
-
-    <footer class="text-center container-fluid foot ">
-
+    <footer class="text-center container-fluid site-footer ">
         <a href="#about"> <span class="glyphicon glyphicon-chevron-up"></span>  </a><br>
      <?php if (!$_SESSION) { ?>   <a href="index.php?action=connect" style='color:#fff;'>connexion</a><?php } else { ?><a href="index.php?action=deconnexion" style='color:#fff;'>déconnexion</a><br><a href="index.php?action=boardPrincipal" style='color:#fff;''>administration</a><?php } ?>
         <h5>© 2018 SERRI-STEPHAN.COM</h5></footer>

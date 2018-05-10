@@ -20,7 +20,7 @@
 
         <div class="col-md-8">
 
-          <img class="rounded mx-auto d-block img-thumbnail" src='/cv/public/images/<?= $portfolio['image'] ?>' alt="">
+          <img  class="rounded   img-thumbnail" src='/cv/public/images/<?= $portfolio['image'] ?>' alt="">
         </div>
   
         <div class="col-md-4">
@@ -38,5 +38,5 @@
                     <a class="btn btn-primary" href="index.php?action=boardFolio"><span class="glyphicon glyphicon-arrow-left"> Retour</span></a>
                     </div>
 </div>
-<br><br><br><br><br><br>
+
 </section>

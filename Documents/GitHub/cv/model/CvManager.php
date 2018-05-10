@@ -74,13 +74,13 @@ public function insertExpCv($title,$period,$description){
 }
 public function insertAvCv($avantage){
     $db = $this->dbConnect();
-    $req = $db->prepare('INSERT INTO  competences(avantage) VALUES (?)');                
+    $req = $db->prepare('INSERT INTO  competences (avantage) VALUES (?)');                
     $affected = $req->execute(array($avantage));
     return  $affected;
 }
 public function insertEdCv($title_education,$title_secondary,$description_education){
     $db = $this->dbConnect();
-    $req = $db->prepare('INSERT INTO  education(​title_education,title_secondary,description_education) VALUES (?,?,?)');
+    $req = $db->prepare('INSERT INTO education (​title_education,title_secondary,description_education)  VALUES (?,?,?)');
     $affected = $req->execute(array($title_education,$title_secondary,$description_education));
     return $affected;
 }

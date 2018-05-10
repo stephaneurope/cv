@@ -9,7 +9,7 @@ class ComposerStaticInitd6ed17c766097eb11044660c5a9799ea
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
-            'Serri\\' => 6,
+            'Stephan\\' => 8,
         ),
         'M' => 
         array (
@@ -27,7 +27,7 @@ class ComposerStaticInitd6ed17c766097eb11044660c5a9799ea
     );
 
     public static $prefixDirsPsr4 = array (
-        'Serri\\' => 
+        'Stephan\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',
         ),

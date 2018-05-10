@@ -14,12 +14,12 @@ class AdminManager extends Manager
 
         return $req;
     }
-     public function updateIdentity($pseudo, $nom, $prenom, $mail, $web, $mobile)
+     public function updateIdentity($pseudo, $nom, $prenom, $mail, $web, $mobile, $works)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare ('UPDATE users SET pseudo = ?, nom = ?, prenom = ?, mail  = ?, web = ?, mobile = ?');
+        $req = $db->prepare ('UPDATE users SET pseudo = ?, nom = ?, prenom = ?, mail  = ?, web = ?, mobile = ?, works = ?');
 
-    $reaffected = $req->execute(array($pseudo, $nom, $prenom, $mail, $web, $mobile));
+    $reaffected = $req->execute(array($pseudo, $nom, $prenom, $mail, $web, $mobile, $works));
 
         return  $reaffected;
     }

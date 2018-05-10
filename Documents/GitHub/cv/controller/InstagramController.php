@@ -3,7 +3,7 @@ namespace Controller;
 
 require "vendor/autoload.php";
  
-class CalendarController{
+class InstagramController{
   
 public function instagramView()
   {

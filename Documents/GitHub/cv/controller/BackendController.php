@@ -138,6 +138,72 @@ if(empty($this->titre)){
 
 }
 
+public function imageFolio()
+{
+  $folioManager = new \Model\FolioManager();
+  $portfolio = $folioManager->getFolio($_GET['id']); 
+ $view = new \Cv\View('imagefolioView');
+    $view->generer(['portfolio' => $portfolio,'imageError'=>$this->imageError]);
+}
+
+public function changeImage($folioId, $image){
+    $this->image  = ($_FILES['image']['name']);
+    $this->imagePath       = '../cv/public/images/' . basename($this->image);
+    $this->imageExtension  = pathinfo($this->imagePath, PATHINFO_EXTENSION);
+    $this->isSuccess       = true;
+    $this->isUploadSuccess = true;
+    $this->isImageUpdated = true;
+ 
+    
+       if(empty($this->image)){
+        $this->isImageUpdated = false;
+        $this->imageError = "Vous n'avez pas selectionné de fichiers";
+      }
+      else
+    {
+       $this->isImageUpdated = true;
+       $this->isUploadSucces = true;
+        if($this->imageExtension != "jpg" && $this->imageExtension != "png" && $this->imageExtension != "jpeg" && $this->imageExtension != "gif")
+        {
+            $this->imageError = "Les fichiers autorisés sont: .jpg, .jpeg, .png, .gif";
+            $this->isUploadSuccess = false;
+        }
+        if($_FILES["image"]["size"] > 500000)
+        {
+           $this->imageError = "Le fichier ne doit pas dépasser les 500KB";
+           $this->isUploadSuccess = false;
+        }
+        if($this->isUploadSuccess)
+        {
+            if(!move_uploaded_file($_FILES["image"]["tmp_name"], $this->imagePath))
+            {
+            $this->imageError = "Il y a eu une erreur lors de l'upload";
+            $this->isUploadSuccess = false;
+            }
+
+      }  
+    } 
+if(($this->isImageUpdated && $this->isUploadSuccess)) {
+$portfolio = new \Model\FolioManager();
+ $result = $portfolio->updateImage($folioId,$image);
+
+ header('location:index.php?action=imageFolio&id='. $folioId);
+ exit();
+}else{
+
+
+$folioManager = new \Model\FolioManager();
+  $portfolio = $folioManager->getFolio($_GET['id']); 
+ $view = new \Cv\View('imagefolioView');
+    $view->generer(['portfolio' => $portfolio,'imageError'=>$this->imageError,'image'=>$this->image,'imagePath '=>$this->imagePath,'imageExtension '=>$this->imageExtension,'isSuccess' =>$this->isSuccess,'isUploadSuccess'=>$this->isUploadSuccess,'isImageUpdated'=>$this->isImageUpdated]);
+
+   
+}
+
+}
+
+
+
 public function boardFolio()
 {
     $folioManager = new \Model\FolioManager();
@@ -237,11 +303,11 @@ if(empty($this->titre)){
             $this->imageError = "Les fichiers autorisés sont: .jpg, .jpeg, .png, .gif";
             $this->isUploadSuccess = false;
         }
-        if(file_exists($this->imagePath))
-        {
-            $this->imageError = "Le fichier existe déja";
-            $this->isUploadSuccess = false; 
-        }
+        //if(file_exists($this->imagePath))
+        //{
+           // $this->imageError = "Le fichier existe déja";
+            //$this->isUploadSuccess = false; 
+        //}
         if($_FILES["image"]["size"] > 500000)
         {
             $this->imageError = "Le fichier ne doit pas dépasser les 500KB";
@@ -263,6 +329,7 @@ if(empty($this->titre)){
       $portfolio = $folioManager->getFolio($_GET['id']); 
     $reaffected = $folioManager->updateProject($folioId, $image, $description, $techno, $comment, $titre, $liens);
     $view = new \Cv\View('portfolioModif');
+    header('location:index.php?action=boardFolio');
         $view->generer(
         [
             'titreError'=>$this->titreError,
@@ -281,7 +348,7 @@ if(empty($this->titre)){
             'portfolio'=>$portfolio
         ]
     );  
-header('location:index.php?action=boardPrincipal');
+
 }else{
   $folioManager = new \Model\FolioManager(); 
 $portfolio = $folioManager->getFolio($_GET['id']); 
@@ -387,7 +454,7 @@ public function insertExPro($title,$period,$description)
    $cvManager = new \Model\CvManager();
    $affected = $cvManager->insertExpCv($title,$period,$description);
    $session = new \App\MessageFlash();
-   $session->setFlash('Votre commentaire a bien été ajouté','');
+   $session->setFlash('Votre expérience professionnelle a bien été ajoutée','');
    header('location:index.php?action=experienceProfessionnel');}else{
           $Session = new \App\MessageFlash();
           $Session->setFlash('Vous n\'avez pas rempli tous les champs',''); 
@@ -524,7 +591,7 @@ public function updateEducation($edId,$title_education,$title_secondary,$descrip
         exit;
     }  
 }
-public function insertEducation($title_education,$title_secondary,$description_education)
+public function insertEducation($title_education , $title_secondary, $description_education)
   {
     if (!empty(htmlspecialchars(ltrim($_POST['title_education']))) && !empty(htmlspecialchars(ltrim($_POST['title_secondary']))) && !empty(htmlspecialchars(ltrim($_POST['description_education'])))){
    $cvManager = new \Model\CvManager();

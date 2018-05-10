@@ -39,7 +39,7 @@
                         
                     </ul>
                     <div class="form-actions">
-                    <input href="" type="submit" class="btn btn-success " value=" Modifier"> </div>
+                    <input href="" type="submit" class="btn btn-success " value=" Ajouter"> </div>
                 </div>
            
                 <div class="clear"></div>

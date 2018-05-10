@@ -4,7 +4,7 @@
  include "menu1.php" ;
     ?>
 
-    <section id="about" class="container-fluid">
+   <section id="about" class="container-fluid">
        <?php while ($data0 = $result->fetch()){  ?>
         <div class="col-xs-8 col-md-4 profile-picture "> <img src="public/images/<?=$data0['profil_img']?>"  alt="Serri Stephan" class="img-circle img-responsive"> </div>
         <div class="heading">
@@ -125,7 +125,7 @@
         <div><a href="index.php?action=cv" class="button3">Voir Et Télécharger CV</a></div>
     </section>
     <section id="portfolio">
-      
+
         <div class="container">
           
             <div class="red-divider"></div>
@@ -144,7 +144,7 @@
                
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
-                        <a class="thumbnail" href="index.php?action=portfolio&amp;id=4" target=""> <img src="/cv/public/images/forteroche.png" class="img-responsive" > </a></div>
+                        <a class="thumbnail" href="" target=""> <img src="/cv/public/images/portfolio.jpeg" class="img-responsive" > </a></div>
                     
              
                      <?php while ($data = $portfolio->fetch())

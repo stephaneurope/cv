@@ -2,8 +2,8 @@
     
     $this->title = 'serri stephan' ;
  include "menu.php" ;?>
-    
- <div id="top">
+<div id="top">
+ <div id="imprime_moi">
     <div id="cv" class="instaFade">
 
         <div class="mainDetails">
@@ -77,10 +77,13 @@
             </section>
         </div>
     </div>
-    </div>
 
-    <script type="text/javascript">
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
+    </div> <div class='imprime'>
+    <input type='btn' id="btn_imprime" class='btn btn-danger' value='Imprimer'/><a href="public/pdf/ticket.pdf" download  > <input type='btn'  class='btn btn-danger' style="margin-top:2px; " value='Télécharger'/></a></div>
+ 
+    
+
+</div>
+
+  
    

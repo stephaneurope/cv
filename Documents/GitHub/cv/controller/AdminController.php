@@ -63,13 +63,14 @@ $adminManager = new \Model\AdminManager();
     $result = $adminManager->identity();  
 $view = new \Cv\View('profil');
 $session = new \App\MessageFlash();
-   $view->generer(['result' => $result,'session' => $session]);
+$imageError = '';
+   $view->generer(['result' => $result,'session' => $session,'imageError'=>$imageError]);
 }
 
-public function updateProfil($pseudo, $nom, $prenom,$mail, $web, $mobile) {
-  if (!empty(htmlspecialchars(ltrim($_POST['pseudo']))) && !empty(htmlspecialchars(ltrim($_POST['nom']))) && !empty(htmlspecialchars(ltrim($_POST['prenom']))) && !empty(htmlspecialchars(ltrim($_POST['mail']))) && !empty(htmlspecialchars(ltrim($_POST['web']))) && !empty(htmlspecialchars(ltrim($_POST['mobile'])))){
+public function updateProfil($pseudo, $nom, $prenom,$mail, $web, $mobile, $works) {
+  if (!empty(htmlspecialchars(ltrim($_POST['pseudo']))) && !empty(htmlspecialchars(ltrim($_POST['nom']))) && !empty(htmlspecialchars(ltrim($_POST['prenom']))) && !empty(htmlspecialchars(ltrim($_POST['mail']))) && !empty(htmlspecialchars(ltrim($_POST['web']))) && !empty(htmlspecialchars(ltrim($_POST['mobile'])))&& !empty(htmlspecialchars(ltrim($_POST['works'])))){
 $adminManager = new \Model\AdminManager();
-$reaffected = $adminManager->updateIdentity($pseudo, $nom, $prenom,$mail, $web, $mobile); 
+$reaffected = $adminManager->updateIdentity($pseudo, $nom, $prenom,$mail, $web, $mobile,$works); 
 $session = new \App\MessageFlash();
    $session->setFlash('Votre profil a été modifié','');
    header('location:index.php?action=profil');}else{
@@ -80,16 +81,17 @@ $session = new \App\MessageFlash();
       }
 }
 public function updateProImg($profil_img){
-$image           = ($_FILES['profil_image']['name']);
+    $image           = ($_FILES['profil_image']['name']);
     $imagePath       = '../cv/public/images/' . basename($image);
     $imageExtension  = pathinfo($imagePath, PATHINFO_EXTENSION);
     $isSuccess       = true;
     $isUploadSuccess = true;
     $isImageUpdated = true;
+    $imageError = '';
 
        if(empty($image)){
-        $this->isImageUpdated = false;
-    
+        $isImageUpdated = false;
+        $imageError = "Vous n'avez sélectionné aucun fichiers!"; 
       }
       else
     {
@@ -115,10 +117,25 @@ $image           = ($_FILES['profil_image']['name']);
 
       }  
     } 
-if(($isSuccess && $isImageUpdated && $isUploadSuccess)||($isSuccess && !$isImageUpdated)) {
+if(($isSuccess && $isImageUpdated && $isUploadSuccess)) {
 $adminManager = new \Model\AdminManager();
  $result = $adminManager->updateProfilImg($profil_img);
  header('location:index.php?action=profil');
+ exit();
+} else {
+  $adminManager = new \Model\AdminManager();
+    $result = $adminManager->identity();  
+    $view = new \Cv\View('profil');
+    $session = new \App\MessageFlash();
+    $view->generer(
+        [
+            'result' => $result,
+            'session' => $session,
+            'imageError'=>$imageError,
+            'image'=>$image,
+            'isSuccess'=>$isSuccess
+        ]
+    );
 }
 
 }

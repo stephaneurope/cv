@@ -34,20 +34,23 @@
                 <div class="sectionContent">
                     
                     <article>
-                         <form action='index.php?action=cvInsertEduc' method="post">
+                <form action="index.php?action=cvInsertEduc" method="post" enctype="multipart/form-data">
                         <h2><input name ='title_education' placeholder="Titre" value=""/></h2>
                         <p class="subDetails"><input placeholder="Titre secondaire" name ='title_secondary' value=""/></p>
-                        <p><textarea placeholder="Description" name ='description_education'></textarea></p>
-                        <input href="" type="submit" class="btn btn-success " value=" Ajouter">
+                        <textarea placeholder="Description" name ='description_education'></textarea>
+                        <br>
+                        <input type="submit" class="btn btn-success " value=" Ajouter">
                     </article>
-                     
+                      </form>
                 </div>
            
                 <div class="clear"></div>
+                </form>
+
                     <div class="form-actions">
                     <a class="btn btn-primary" href="index.php?action=boardCv"><span class="glyphicon glyphicon-arrow-left"> Retour</span></a> </div>
                 
-            </form>
+           
          
             </section>
             

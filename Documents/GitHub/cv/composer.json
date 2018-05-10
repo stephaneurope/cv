@@ -1,5 +1,5 @@
 {
-    "name": "serri/app",
+    "name": "Serri/App",
     "authors": [
         {
             "name": "serri stephan",
@@ -10,7 +10,7 @@
 
     "autoload": {
     "psr-4" :{
-        "Serri\\": "",
+        "Stephan\\": "",
         "Model\\": "model/",
         "Controller\\": "controller/",
         "Cv\\": "view/frontend/",

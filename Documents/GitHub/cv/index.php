@@ -2,7 +2,7 @@
 require "vendor/autoload.php";
 
 $ctrlfrontend = new \Controller\FrontendController;
-$routeur = new \Serri\Routeur;
+$routeur = new \Stephan\Routeur;
 
 if (isset($_GET['action'])){
 $routeur->checkUrl($_GET['action']);}

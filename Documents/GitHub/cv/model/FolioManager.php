@@ -41,6 +41,15 @@ public function updateProject($folioId, $image, $description, $techno, $comment,
     return $reaffected;
 
 }
+public function updateImage($folioId, $image)
+{
+    $db = $this->dbConnect();
+    $req = $db->prepare('UPDATE portfolio SET image = ? WHERE id = ? ');
+    $reaffected =$req->execute(array($image,$folioId));
+    return $reaffected;
+
+}
+
 public function updateProjectNoImage($folioId,$description, $techno, $comment, $titre, $liens)
 {
     $db = $this->dbConnect();

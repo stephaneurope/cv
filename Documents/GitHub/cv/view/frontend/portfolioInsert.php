@@ -23,10 +23,12 @@
 
    <div class="form-group">
       <label for="techno">Technologies:</label><br>
-      <input type="checkbox" class="chkbx" id="techno" value="<i class='fab fa-html5 fa-3x'></i>" /> <label for="techno">html</label><br>
-       <input type="checkbox" class="chkbx" id="techno" value="<i class='fab fa-css3-alt fa-3x'></i>" style="color:orange;"/> <label for="techno">css</label><br>
+      <input type="checkbox" class="chkbx"  id="techno" value="<i   class='fab fa-html5 fa-3x'></i>" /> <label for="techno">html</label><br>
+       <input type="checkbox" class="chkbx" id="techno" value="<i class='fab fa-css3-alt fa-3x'></i>" /> <label for="techno">css</label><br>
            <input type="checkbox" class="chkbx"  id="techno" value="<i class='fab fa-js fa-3x'></i>"/> <label for="techno">javascript</label>
            <br>
+           <input type="checkbox" class="chkbx" id="techno" value="<i class='fab fa-wordpress fa-3x'></i>" /> <label for="techno">Wordpress</label><br>
+           <input type="checkbox" class="chkbx" id="techno" value="<i class='fab fa-php fa-3x'></i>" /> <label for="techno">Php</label><br>
        <div class="selectedtext"><textarea type="text" name='techno' class="mceNoEditor" id='selectedtext' placeholder="SelectednCheckboxs"></textarea></div>
        <span class="help-inline"></span>
    </div>

@@ -13,6 +13,7 @@
           <img src="public/images/<?=$data0['profil_img']?>"  class=" avatar img-circle img-responsive" alt="avatar">
           <h6>Changer sa photo de profil...</h6>
            <input type="file" name='profil_image' class="form-control">
+            <span class="help-inline"><?= $imageError;?></span>
         </div>
         <div class="form-actions">
                     <button type="submit" class="btn btn-default"> Modifier</button>               
